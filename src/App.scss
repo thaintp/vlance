@@ -1,0 +1,44 @@
+@import "colors.scss";
+
+.App {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.App > :not(hr) {
+  padding: 0 130px;
+}
+
+.App-seller {
+  padding: 24px 20px 24px 0;
+  background-color: $white-two;
+  height: 100% !important;
+}
+
+.App-seller__logo {
+  padding: 0 44px !important;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.App-seller__topbar {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.App-seller__sidebar {
+  height: calc(100% - 100px);
+}
+
+.App-loading {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.219);
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

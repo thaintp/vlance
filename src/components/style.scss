@@ -1,0 +1,361 @@
+@import "colors.scss";
+
+// Top bar
+
+.top-bar {
+  display: flex;
+  padding-top: 20px !important;
+}
+
+.top-bar__item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+}
+
+.top-bar__inputSearch {
+  height: 35px;
+  width: 181px;
+  padding: 5px 37px 5px 15px;
+  border-radius: 17px;
+  border: solid 1px $greyish-two;
+  outline: none;
+}
+
+.top-bar__iconSearch {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  margin: 1px 0 0 145px;
+  padding: 2px;
+  object-fit: contain;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.top-bar__logo {
+  justify-content: center;
+}
+
+.top-bar__image {
+  cursor: pointer;
+  height: 20px;
+  padding: 0.3px 0.2px 0.4px 0.5px;
+}
+
+.top-bar__utils {
+  justify-content: flex-end;
+}
+
+// Auth buttons
+
+.auth-buttons {
+  display: flex;
+}
+.auth-buttons__text {
+  font-size: 14px;
+  font-stretch: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+}
+
+.auth-buttons__registerBtn {
+  width: 70px;
+  font-weight: normal;
+  font-style: normal;
+  color: $greyish-brown;
+  background: none;
+  border: none;
+}
+
+.auth-buttons__loginBtn {
+  width: 140px;
+  height: 35px;
+  border-radius: 100px;
+  border: solid 1px $orange-1;
+  margin: 0 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+}
+.auth-buttons__loginBtn__text {
+  width: 100%;
+  font-weight: bold;
+  font-style: bold;
+  text-align: center;
+  color: $orange-2;
+}
+
+// Account
+.account {
+  position: relative;
+  display: inline-block;
+  margin-right: 30px;
+}
+.account__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 5px 20px 0 rgba(61, 61, 63, 0.2);
+  border: solid 2px $white;
+}
+.account__dropdown {
+  display: none;
+  background-color: $white-five;
+  border: solid 0.5px $white-six;
+  position: absolute;
+  min-width: 180px;
+  z-index: 1;
+  box-shadow: 0 14px 30px 0 rgba(0, 0, 0, 0.14);
+  padding: 7px 13px;
+}
+.account__action {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.83;
+  letter-spacing: normal;
+  color: $greyish-brown;
+}
+
+.account:hover .account__dropdown {
+  display: block;
+}
+
+// Button
+
+.button {
+  box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12);
+  border: none !important;
+  outline: none !important;
+  &:hover {
+    background-color: $orange-3 !important;
+  }
+}
+a.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button__text {
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: $white;
+}
+
+// Error
+.error {
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.83;
+  letter-spacing: normal;
+  text-align: center;
+  color: $strawberry;
+}
+
+// Login modal
+.login-modal__text {
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: $greyish-brown;
+}
+.login-modal__label {
+  font-size: 12px;
+  font-weight: bold;
+  color: $dark-grey;
+}
+.login-modal__title {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1.31;
+  text-align: center;
+  color: $dark-grey;
+}
+.login-modal__footer {
+  display: flex;
+  justify-content: center !important;
+  &__text {
+    font-weight: 500;
+  }
+}
+.login-modal__password {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.login-modal__rememberPassword {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.login-modal__checkbox {
+  margin-right: 6px;
+}
+.login-modal__link {
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: $pumpkin-orange;
+  border: solid $pumpkin-orange;
+  border-width: 0 0 1px 0;
+  margin: 0 4px;
+  cursor: pointer;
+  &:hover {
+    color: $orange-1;
+  }
+}
+
+.login-modal__forgotPassword {
+  font-weight: 600;
+  color: $greyish-brown;
+}
+
+.login-modal__label_2 {
+  margin: 0;
+}
+
+.modal-header {
+  border: none !important;
+  padding-bottom: 0 !important;
+}
+
+// Register modal
+.register-modal__title {
+  font-size: 32px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.31;
+  letter-spacing: normal;
+  text-align: center;
+  color: $dark-grey;
+}
+.register-modal__policy {
+  text-align: center;
+  margin: 40px 80px 50px 80px;
+}
+.register-modal__footer {
+  display: flex;
+  justify-content: center !important;
+}
+.register-modal__link {
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: $pumpkin-orange;
+  border: solid $pumpkin-orange;
+  border-width: 0 0 1px 0;
+  margin: 0 4px;
+  cursor: pointer;
+  &:hover {
+    color: $orange-1;
+  }
+}
+
+// Navbar
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.link-text {
+  text-decoration: "none";
+  color: "#000000";
+}
+
+// Sort by
+.sort-by {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.sort-by__choice {
+  margin-left: 10px;
+}
+
+// Category
+.category__tag {
+  font-size: 14px;
+  color: $greyish-brown;
+  padding-bottom: 10px;
+}
+.category__tag--active {
+  color: $orange-2;
+}
+
+// Filter
+.filter__tag {
+  font-size: 14px;
+  color: $greyish-brown;
+  padding-bottom: 10px;
+}
+.filter__tag--active {
+  color: $orange-2;
+}
+
+// Filter Item
+.filter-item {
+  button {
+    text-align: left;
+    outline: none;
+    background-color: $white;
+    padding: 0;
+    display: block;
+    border-width: 0 0 1px 0;
+    &::after {
+      content: "▼";
+      float: right;
+      margin-bottom: 5px;
+    }
+  }
+}
+.filter-item__tags {
+  padding: 15px 0;
+}
+
+// Filter Item Tag
+
+.filter-item-tag {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-between;
+  padding: 6px 5px 5px 10px;
+  background-color: $white-grey;
+  margin: 3px 0;
+}
+.filter-item-tag__title--active {
+  color: $orange-1;
+}
+
+// Pagination
+.pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+}

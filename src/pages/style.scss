@@ -1,0 +1,39 @@
+@import "colors.scss";
+
+// Jobs page
+.jobs-page__sidebar {
+  padding-left: 0 !important;
+  padding-right: 10px !important;
+  * {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.jobs-page__lastColumn {
+  display: flex;
+  justify-content: flex-end;
+}
+.jobs-page__content {
+  padding-left: 10px !important;
+  padding-right: 0 !important;
+}
+.jobs-page__content__title {
+  margin-bottom: 14px !important;
+}
+.jobs-page__content .container-fluid {
+  padding: 0 !important;
+}
+.jobs-page__content .row {
+  margin: 0 -10px;
+}
+.jobs-page__sortBy {
+  padding: 0 10px !important;
+  width: 70%;
+}
+.jobs-page__pagination {
+  padding: 0 10px !important;
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
