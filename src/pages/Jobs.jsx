@@ -24,20 +24,20 @@ const Jobs = () => {
             </Col>
             <Col xs={10} className="jobs-page__content">
               <Container fluid>
-                <Row className="jobs-page__content__title">
+                {/* <Row>
                   <div className="jobs-page__sortBy">
                     <SortBy />
                   </div>
                   <div className="jobs-page__pagination">
                     <Pagination current={parseInt(1)} max={parseInt(10)} />
                   </div>
-                </Row>
+                </Row> */}
                 <Row>
                   <JobList jobs={jobs}></JobList>
                 </Row>
-                <div className="jobs-page__content">
+                <Row>
                   <Pagination current={parseInt(1)} max={parseInt(10)} />
-                </div>
+                </Row>
               </Container>
             </Col>
           </Row>

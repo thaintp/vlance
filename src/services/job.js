@@ -4,7 +4,7 @@ const fake = [
   {
     id: "1",
     name: "Cần tuyển marketing làm việc online",
-    category: "Việc KD và marketing khác",
+    category: "Bán thời gian",
     expect_balance: [8000000, 12000000],
     overview:
       "Vì lý do phát triển nên chúng tôi cần tuyển một bạn Maketing Manager làm việc online hoặc fulltime. Chịu trách nhiệm trực tiếp cho cả 3 thương hiệu kể trên. ",
@@ -14,7 +14,7 @@ const fake = [
   {
     id: "2",
     name: "Tích hợp thanh toán vietcombank php",
-    category: "Lập trình web",
+    category: "Dự án",
     expect_balance: [3000000, 35000000],
     overview: "Tích hợp api thanh toán vietcombank php ",
     description:
