@@ -1,0 +1,105 @@
+import "./style.scss";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+
+const ProjectInfo = ({ job }) => {
+  return (
+    <div className="project-info">
+      <Container className="project-info__job">
+        <div className="project-info__title">Thông tin dự án</div>
+        <Row>
+          <Col xs={5} className="project-info__field mb-2">
+            ID dự án
+          </Col>
+          <Col xs={7}>{job.id}</Col>
+        </Row>
+        <Row>
+          <Col xs={5} className="project-info__field mb-2">
+            Ngày đăng
+          </Col>
+          <Col xs={7}>{job.created_at}</Col>
+        </Row>
+        <Row>
+          <Col xs={5} className="project-info__field mb-2">
+            Chỉ còn
+          </Col>
+          <Col xs={7}>23 ngày</Col>
+        </Row>
+        <Row>
+          <Col xs={5} className="project-info__field mb-2">
+            Địa điểm
+          </Col>
+          <Col xs={7}>Toàn quốc</Col>
+        </Row>
+        <Row>
+          <Col xs={5} className="project-info__field mb-2">
+            Ngân sách
+          </Col>
+          <Col xs={7}>{job.expect_balance}</Col>
+        </Row>
+        <Row>
+          <Col xs={5} className="project-info__field mb-2">
+            Hình thức làm việc
+          </Col>
+          <Col xs={7}>{job.job_type}</Col>
+        </Row>
+        <Row>
+          <Col xs={5} className="project-info__field mb-2">
+            Hình thức trả lương
+          </Col>
+          <Col xs={7}>{job.job_type}</Col>
+        </Row>
+      </Container>
+      <Container className="project-info__employer">
+        <div className="project-info__title">Thông tin khách hàng</div>
+        <Row className="p-0">
+          <Col xs={4}>
+            <Link
+              className="project-info__avatar"
+              to={`/users/${job.employer?.id}`}
+            >
+              <img src={job.employer?.avatar} alt="avatar" />
+            </Link>
+          </Col>
+          <Col xs={8} className="project-info__employer__info">
+            <Link
+              className="project-info__employer__name"
+              to={`/users/${job.employer?.id}`}
+            >
+              {job.employer?.name}
+            </Link>
+            <div className="project-info__jobTitle">{job.employer?.job}</div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={3} className="project-info__field mb-2">
+            Đến từ
+          </Col>
+          <Col xs={9}>{job.employer?.city}</Col>
+        </Row>
+        <Row>
+          <Col xs={3} className="project-info__field mb-2">
+            Tham gia
+          </Col>
+          <Col xs={9}>{job.employer?.created_at}</Col>
+        </Row>
+        <Row>
+          <Col xs={3} className="project-info__field mb-2">
+            Đã đăng
+          </Col>
+          <Col xs={9}>
+            <Link to={`/users/${job.employer?.id}/posts`}>
+              {job.employer?.posted} việc
+            </Link>
+          </Col>
+        </Row>
+        <Button className="w-100 my-4 btn-success">Liên hệ trực tiếp</Button>
+      </Container>
+    </div>
+  );
+};
+
+export default ProjectInfo;

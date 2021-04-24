@@ -15,3 +15,4 @@ export { default as Pagination } from "./Pagination";
 export { default as JobList } from "./JobList";
 export { default as JobItem } from "./JobItem";
 export { default as Detail } from "./Detail";
+export { default as ProjectInfo } from "./ProjectInfo";

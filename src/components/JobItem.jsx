@@ -8,22 +8,24 @@ const JobItem = ({ job }) => {
       <div className="job-item__title">
         <div className="job-item__name">
           <Link className="job-item__text" to={`/jobs/${job.id}`}>
-            {job.name}
+            {job.title}
           </Link>
-          <span className="job-item__category">{job.category}</span>
+          <span className="job-item__category">{job.job_type}</span>
         </div>
         <button className="job-item__bookmark">
           <FaRegBookmark></FaRegBookmark>
         </button>
       </div>
+      <Link className="job-item__text" to={`/users/${job.employer.id}`}>
+        {job.employer.name}
+      </Link>
       <div className="job-item__checkout">
         <div className="checkout__title">
-          Toàn Quốc | Việc KD và marketing khác |{" "}
-          {job.expect_balance.join(" - ")}
+          Toàn Quốc | {job.category.name} | {job.expect_balance}
         </div>
         <div className="checkout__expired">Hạn nhận hồ sơ: 21 ngày 16 giờ</div>
       </div>
-      <div className="job-item__text job-item__overview">{job.overview}</div>
+      <div className="jjob-item__overview">{job.description}</div>
     </div>
   );
 };

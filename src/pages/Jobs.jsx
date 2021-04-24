@@ -14,17 +14,16 @@ const Jobs = () => {
   }, []);
   return (
     <div className="jobs-page">
-      <div className="jobs-page">
-        <Container fluid>
-          <Row>
-            <Col className="jobs-page__sidebar" xs={2}>
-              <Category />
-              <hr />
-              <Filter />
-            </Col>
-            <Col xs={10} className="jobs-page__content">
-              <Container fluid>
-                {/* <Row>
+      <Container fluid>
+        <Row>
+          <Col className="jobs-page__sidebar" xs={2}>
+            <Category />
+            <hr />
+            <Filter />
+          </Col>
+          <Col xs={10} className="jobs-page__content">
+            <Container fluid>
+              {/* <Row>
                   <div className="jobs-page__sortBy">
                     <SortBy />
                   </div>
@@ -32,17 +31,16 @@ const Jobs = () => {
                     <Pagination current={parseInt(1)} max={parseInt(10)} />
                   </div>
                 </Row> */}
-                <Row>
-                  <JobList jobs={jobs}></JobList>
-                </Row>
-                <Row>
-                  <Pagination current={parseInt(1)} max={parseInt(10)} />
-                </Row>
-              </Container>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+              <Row>
+                <JobList jobs={jobs}></JobList>
+              </Row>
+              <Row>
+                <Pagination current={parseInt(1)} max={parseInt(10)} />
+              </Row>
+            </Container>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

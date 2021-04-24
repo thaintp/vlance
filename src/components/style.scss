@@ -74,7 +74,7 @@
   height: 35px;
   border-radius: 100px;
   border: solid 1px $orange-1;
-  margin: 0 30px;
+  margin-left: 30px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -402,6 +402,7 @@ a.button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .job-item__bookmark {
@@ -416,6 +417,10 @@ a.button {
   }
 }
 
+.job-item__text {
+  color: $greyish;
+}
+
 .job_item__overview {
   font-size: 14px;
 }
@@ -423,4 +428,59 @@ a.button {
 // Job list
 .jobs-list {
   background-color: #fdfdfd;
+}
+
+// Detail
+
+.detail__title {
+  font-size: 30px;
+  font-weight: 100;
+}
+
+// Project info
+.project-info {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  padding: 10px;
+}
+
+.project-info__title {
+  font-size: 17px;
+  letter-spacing: -0.03em;
+}
+
+.project-info__field {
+  color: #aaa;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-info__avatar img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.project-info__employer__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-info__employer__name {
+  color: $blue-two;
+  font-size: 16px;
+}
+.project-info__employer__jobTitle {
+  color: $greyish-one;
+  font-size: 16px;
+}
+
+a {
+  color: $blue-one !important;
+  text-decoration: none !important;
+  &:hover {
+    color: $blue-two !important;
+  }
 }

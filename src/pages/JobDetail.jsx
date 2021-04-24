@@ -9,7 +9,7 @@ const JobDetail = () => {
   const { id } = useParams();
   const [job, setJob] = useState({});
   useEffect(() => {
-    JobService.getByID(id).then((data) => setJob(data));
+    JobService.getByID(parseInt(id)).then((data) => setJob(data));
   }, [id]);
   return (
     <div className="job-detail">
