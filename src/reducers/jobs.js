@@ -1,7 +1,7 @@
 const initialState = [];
 
 const jobsReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+  const { type } = action;
 
   switch (type) {
     default:

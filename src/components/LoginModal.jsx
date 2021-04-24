@@ -20,7 +20,6 @@ const LoginModal = () => {
     loading: false,
   });
   const form = useRef();
-  const checkBtn = useRef();
   const dispatch = useDispatch();
 
   const { signin } = useSelector((state) => state.modal);

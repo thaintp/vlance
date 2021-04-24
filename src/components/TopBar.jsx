@@ -1,5 +1,5 @@
 import "./style.scss";
-import { AuthButtons, CartWrapper } from "components";
+import { AuthButtons } from "components";
 import { Link } from "react-router-dom";
 
 const TopBar = () => {
