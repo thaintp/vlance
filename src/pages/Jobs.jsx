@@ -2,9 +2,16 @@ import "./style.scss";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Category, Filter, Pagination, SortBy } from "components";
+import { useState, useEffect } from "react";
+
+import { Category, Filter, Pagination, SortBy, JobList } from "components";
+import JobService from "services/job";
 
 const Jobs = () => {
+  const [jobs, setJobs] = useState([]);
+  useEffect(() => {
+    JobService.getAll().then((data) => setJobs(data));
+  }, []);
   return (
     <div className="jobs-page">
       <div className="jobs-page">
@@ -26,8 +33,7 @@ const Jobs = () => {
                   </div>
                 </Row>
                 <Row>
-                  {/* <jobsList jobs={jobs} /> */}
-                  List jobs
+                  <JobList jobs={jobs}></JobList>
                 </Row>
                 <div className="jobs-page__content">
                   <Pagination current={parseInt(1)} max={parseInt(10)} />

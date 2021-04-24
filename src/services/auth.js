@@ -8,7 +8,7 @@ class AuthService {
       data: { email, password },
     }).then((response) => {
       if (response.data.accessToken) {
-        localStorage.setItem("account", JSON.stringify(response.data));
+        localStorage.setItem("user", JSON.stringify(response.data));
       }
 
       return response.data;
@@ -16,7 +16,7 @@ class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("account");
+    localStorage.removeItem("user");
   }
 
   async update() {
@@ -26,7 +26,7 @@ class AuthService {
       data: { method: "post" },
     }).then((response) => {
       if (response.data.accessToken) {
-        localStorage.setItem("account", JSON.stringify(response.data));
+        localStorage.setItem("user", JSON.stringify(response.data));
       }
       return response.data;
     });

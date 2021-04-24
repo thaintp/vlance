@@ -12,3 +12,6 @@ export { default as Filter } from "./Filter";
 export { default as FilterItem } from "./FilterItem";
 export { default as FilterItemTag } from "./FilterItemTag";
 export { default as Pagination } from "./Pagination";
+export { default as JobList } from "./JobList";
+export { default as JobItem } from "./JobItem";
+export { default as Detail } from "./Detail";

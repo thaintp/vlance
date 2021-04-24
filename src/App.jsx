@@ -1,7 +1,7 @@
 import "App.scss";
 
 import { Router, Switch, Route, Redirect } from "react-router-dom";
-import { Home, Jobs } from "pages";
+import { Home, Jobs, JobDetail } from "pages";
 import { TopBar, NavBar } from "components";
 import { history } from "./helpers/history";
 
@@ -19,6 +19,9 @@ function App() {
           </Route>
           <Route exact path="/jobs">
             <Jobs></Jobs>
+          </Route>
+          <Route path="/jobs/:id">
+            <JobDetail></JobDetail>
           </Route>
           <Route path="/">
             <Redirect to="/" />
