@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import { ProjectInfo } from "components";
+import { ProjectInfo, OfferForm } from "components";
 
 const Detail = ({ job }) => {
   return (
@@ -20,6 +20,7 @@ const Detail = ({ job }) => {
           </Col>
         </Row>
       </Container>
+      <OfferForm></OfferForm>
     </div>
   );
 };
