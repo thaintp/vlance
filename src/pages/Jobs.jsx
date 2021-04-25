@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 
-import { Category, Filter, Pagination, SortBy, JobList } from "components";
+import { Category, Filter, Pagination, JobList } from "components";
 import JobService from "services/job";
 
 const Jobs = () => {
