@@ -6,7 +6,16 @@ import {
   LOGOUT,
 } from "../actions/types";
 
-const account = JSON.parse(localStorage.getItem("user"));
+// const account = JSON.parse(localStorage.getItem("user"));
+const account = {
+  id: 1,
+  name: "Tào Mạnh Đức",
+  job: "Software Engineer",
+  avatar: "https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg",
+  city: "TP Hồ Chí Minh",
+  created_at: "2021-04-14 20:32:15",
+  posted: 3,
+};
 
 const initialState = account
   ? { isLoggedIn: true, account }

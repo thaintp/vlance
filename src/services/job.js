@@ -2,7 +2,7 @@
 
 const fake = [
   {
-    id: 1,
+    id: 1412,
     employer: {
       id: 1,
       name: "Tào Mạnh Đức",
@@ -24,9 +24,10 @@ const fake = [
     end_receive_date: "2021-05-09 19:09:52",
     created_at: "2021-04-14 20:32:15",
     updated_at: "2021-04-14 20:32:15",
+    state: "Offer",
   },
   {
-    id: 2,
+    id: 8080,
     employer: {
       id: 2,
       name: "Triệu Tử Long",
@@ -48,6 +49,7 @@ const fake = [
     end_receive_date: "2021-05-09 19:09:52",
     created_at: "2021-04-14 20:32:15",
     updated_at: "2021-04-14 20:32:15",
+    state: "Pending",
   },
 ];
 
