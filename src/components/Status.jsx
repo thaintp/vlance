@@ -1,11 +1,5 @@
 import "./style.scss";
-
-const map_status = {
-  offer: "Chào giá",
-  pending: "Đang làm",
-  completed: "Đã hoàn thành",
-  canceled: "Đã hủy",
-};
+import { map_status } from "utils/status";
 
 const Status = ({ status }) => {
   return (

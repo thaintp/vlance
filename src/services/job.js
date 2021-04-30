@@ -24,7 +24,7 @@ const fake = [
     end_receive_date: "2021-05-09 19:09:52",
     created_at: "2021-04-14 20:32:15",
     updated_at: "2021-04-14 20:32:15",
-    state: "Offer",
+    state: "offer",
   },
   {
     id: 8080,
@@ -49,7 +49,7 @@ const fake = [
     end_receive_date: "2021-05-09 19:09:52",
     created_at: "2021-04-14 20:32:15",
     updated_at: "2021-04-14 20:32:15",
-    state: "Pending",
+    state: "pending",
   },
 ];
 
@@ -59,6 +59,13 @@ class JobService {
   }
   async getByID(id) {
     return fake.filter((x) => x.id === id)[0];
+  }
+  async getByState(state) {
+    console.log(
+      "🚀 ~ file: job.js ~ line 64 ~ JobService ~ getByState ~ state",
+      state
+    );
+    return fake.filter((x) => x.state === state);
   }
 }
 

@@ -4,11 +4,11 @@ import { EmployerJobItem } from "components";
 import { useState, useEffect } from "react";
 import JobService from "services/job";
 
-const EmployerJobItems = () => {
+const EmployerJobItems = ({ tab }) => {
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
-    JobService.getAll().then((data) => setJobs(data));
-  }, []);
+    JobService.getByState(tab).then((data) => setJobs(data));
+  }, [tab]);
 
   return (
     <div className="employer-job-items">
@@ -17,10 +17,9 @@ const EmployerJobItems = () => {
           <tr>
             <th className="employer-job-items__title">ID</th>
             <th className="employer-job-items__title">TIÊU ĐỀ</th>
+            <th className="employer-job-items__title">DANH MỤC</th>
             <th className="employer-job-items__title">GIÁ</th>
             <th className="employer-job-items__title">SỐ NGÀY DỰ KIẾN</th>
-            <th className="employer-job-items__title">TÌNH TRẠNG</th>
-            <th className="employer-job-items__title"></th>
           </tr>
         </thead>
         <tbody>

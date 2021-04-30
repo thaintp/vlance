@@ -20,3 +20,4 @@ export { default as OfferForm } from "./OfferForm";
 export { default as EmployerJobItems } from "./EmployerJobItems";
 export { default as EmployerJobItem } from "./EmployerJobItem";
 export { default as Status } from "./Status";
+export { default as TabBar } from "./TabBar";
