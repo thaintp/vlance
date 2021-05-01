@@ -17,6 +17,8 @@ export { default as JobItem } from "./JobItem";
 export { default as Detail } from "./Detail";
 export { default as ProjectInfo } from "./ProjectInfo";
 export { default as OfferForm } from "./OfferForm";
+export { default as OfferList } from './OfferList';
+export { default as OfferItem } from './OfferItem';
 export { default as EmployerJobItems } from "./EmployerJobItems";
 export { default as EmployerJobItem } from "./EmployerJobItem";
 export { default as Status } from "./Status";

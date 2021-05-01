@@ -553,6 +553,64 @@ a {
   }
 }
 
+// Offer List
+.offer-list__head {
+  background-color: #f8f8f8;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.offer-list__field-value {
+  font-weight: bold;
+}
+
+.offer-list__head__sec-2 {
+  display: flex;
+  justify-content: center;
+}
+
+// Offer Item
+.offer-item {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.offer-item__avatar {
+  width: 90px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  margin-bottom: 10px;
+}
+
+.offer-item__rating-icon {
+  width: 18px;
+}
+
+.offer-item__full-name {
+  font-size: 20px;
+}
+
+.offer-item__job-title {
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: #999999;
+  font-style: italic;
+}
+
+.offer-item__field {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.offer-item__field-value {
+  font-size: 14px;
+}
+
 // Employers job item
 .employer-job-items {
   background-color: #fafafa;
