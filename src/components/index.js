@@ -25,3 +25,4 @@ export { default as Status } from "./Status";
 export { default as TabBar } from "./TabBar";
 export {default as ReviewModal } from "./ReviewModal";
 export {default as ReviewResultModal } from "./ReviewResultModal";
+export {default as ReviewButton } from "./ReviewButton";
