@@ -4,6 +4,7 @@ import { Router, Switch, Route, Redirect } from "react-router-dom";
 import { Home, Jobs, JobDetail, JobManager } from "pages";
 import { TopBar, NavBar } from "components";
 import { history } from "./helpers/history";
+import PostJob from "pages/PostJob";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/jobs/:id">
             <JobDetail></JobDetail>
+          </Route>
+          <Route path="/postjob">
+            <PostJob></PostJob>
           </Route>
           <Route path="/">
             <Redirect to="/" />
