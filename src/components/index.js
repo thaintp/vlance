@@ -23,3 +23,5 @@ export { default as EmployerJobItems } from "./EmployerJobItems";
 export { default as EmployerJobItem } from "./EmployerJobItem";
 export { default as Status } from "./Status";
 export { default as TabBar } from "./TabBar";
+export {default as ReviewModal } from "./ReviewModal";
+export {default as ReviewResultModal } from "./ReviewResultModal";
