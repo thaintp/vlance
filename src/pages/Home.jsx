@@ -8,6 +8,8 @@ import {
 } from "components";
 
 const Home = () => {
+  const [reviewModalShow, setReviewModalShow] = useState(false);
+
   return (
     <div className="home-page">
       <MyCarousel />
