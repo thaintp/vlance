@@ -23,12 +23,14 @@ const ReviewResultModal = ({ show, onHide, rate, review }) => {
             <img
               src="/images/star-empty.png"
               className="offer-item__rating-icon"
+              alt=""
             />
           }
           fullSymbol={
             <img
               src="/images/star-full.png"
               className="offer-item__rating-icon"
+              alt=""
             />
           }
           initialRating={rate}

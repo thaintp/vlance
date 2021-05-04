@@ -724,3 +724,53 @@ a {
   margin: 0 5px;
   width: 80px;
 }
+
+// Carousel
+.my-carousel {
+  .my-carousel__item {
+    height: 500px;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(50%);
+      -webkit-filter: brightness(50%);
+    }
+  }
+}
+
+// Most Popular Job List
+.most-popular-job-list__title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.most-popular-job-list__job-list {
+  border: 1px solid gainsboro;
+}
+
+.most-popular-job-list__all-jobs-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+// Step
+.step__img-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.step__img {
+  width: 90%;
+}
+
+.step__title {
+  font-size: 32px;
+}
+
+.step__sub-title {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #666666;
+}

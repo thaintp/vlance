@@ -13,7 +13,7 @@ const Jobs = () => {
     JobService.getAll().then((data) => setJobs(data));
   }, []);
   return (
-    <div className="jobs-page">
+    <div className="jobs-page not-fluid">
       <Container fluid>
         <Row>
           <Col className="jobs-page__sidebar" xs={2}>

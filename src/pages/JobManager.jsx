@@ -7,7 +7,7 @@ const JobManager = () => {
   const [tab, setTab] = useState(Object.keys(map_status)[0]);
 
   return (
-    <div className="job-manager">
+    <div className="job-manager not-fluid">
       <div className="job-manager__title">QUẢN LÝ CÔNG VIỆC</div>
       <TabBar tab={tab} setTab={setTab} />
       <EmployerJobItems tab={tab} />
