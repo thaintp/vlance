@@ -1,7 +1,7 @@
 import "App.scss";
 
 import { Router, Switch, Route, Redirect } from "react-router-dom";
-import { Home, Jobs, JobDetail, JobManager, PostJob, Profile } from "pages";
+import { Home, Jobs, JobDetail, JobManager, PostJob, Profile, EditProfile } from "pages";
 import { TopBar, NavBar } from "components";
 import { history } from "./helpers/history";
 
@@ -31,6 +31,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile></Profile>
+          </Route>
+          <Route path="/edit-profile">
+            <EditProfile></EditProfile>
           </Route>
           <Route path="/">
             <Redirect to="/" />
