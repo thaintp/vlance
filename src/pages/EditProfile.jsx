@@ -153,9 +153,9 @@ const EditProfile = () => {
                                 <div class="text-dark order-2 order-md-1">
                                 </div>
                                 <div class="nav nav-dark order-1 order-md-2"> 
-                                    <a href="http://keenthemes.com/metronic" target="_blank" rel="noreferrer" class="nav-link pr-3 pl-0">About</a>
-                                    <a href="http://keenthemes.com/metronic" target="_blank" rel="noreferrer" class="nav-link px-3">Team</a>
-                                    <a href="http://keenthemes.com/metronic" target="_blank" rel="noreferrer" class="nav-link pl-3 pr-0">Contact</a>
+                                    <a href="/#" target="_blank" rel="noreferrer" class="nav-link pr-3 pl-0">About</a>
+                                    <a href="/#" target="_blank" rel="noreferrer" class="nav-link px-3">Team</a>
+                                    <a href="/#" target="_blank" rel="noreferrer" class="nav-link pl-3 pr-0">Contact</a>
                                 </div>
                             </div>
                         </div>
