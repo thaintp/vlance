@@ -66,7 +66,7 @@ class JobService {
       .then((res) => res.data)
       .catch((err) => console.error(err));
   }
-  async getJobMamangement(filter = {}) {
+  async get(filter = {}) {
     return await axios({
       method: "GET",
       url: `/job`,

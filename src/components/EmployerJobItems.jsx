@@ -12,12 +12,12 @@ const EmployerJobItems = ({ tab, role }) => {
     console.log("Tab", tab);
     if (role === "employer") {
       //{employer_id, status}
-      JobService.getJobMamangement({
+      JobService.get({
         employer_id: account.id,
         status: tab,
       }).then((data) => setJobs(data.data));
     } else {
-      JobService.getJobMamangement({
+      JobService.get({
         freelancer_id: account.id,
         status: tab,
       }).then((data) => {
