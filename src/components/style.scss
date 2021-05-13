@@ -787,3 +787,86 @@ a {
   font-size: 18px;
   color: #666666;
 }
+
+// Conversation
+.conversation {
+  font-size: 16px;
+}
+
+.conversation__job-info {
+  padding: 0 10px;
+  margin-bottom: 50px;
+}
+
+.conversation__job-info__title {
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.conversation__job-info__field-label {
+  color: #aaaaaa;
+  font-size: 15px;
+}
+
+.conversation__job-info__field-value {
+  font-size: 15px;
+}
+
+.conversation__review-box {
+  background: #f8f8f8;
+  padding: 20px 10px;
+  border-radius: 5px;
+}
+
+.conversation__review-box__title {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.conversation__review-box__sub-title {
+  color: #666666;
+  font-size: 15px;
+}
+
+.conversation__review-box__btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto;
+}
+
+.conversation__chat-box {
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.conversation__chat-history__header {
+  font-weight: 500;
+}
+
+.conversation__message-item {
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+.conversation__message-item__avatar {
+  width: 70px;
+  border-radius: 50%;
+  border: 1px solid grey;
+}
+
+.conversation__message-item__from-user {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.conversation__message-item__message {
+
+}
+
+.conversation__message-item__created-at {
+  color: #666666;
+  font-size: 14px;
+}
