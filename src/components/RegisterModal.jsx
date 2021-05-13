@@ -18,6 +18,7 @@ const RegisterModal = () => {
     name: "",
     email: "",
     password: "",
+    repassword: "",
     successful: false,
   });
 
@@ -37,12 +38,15 @@ const RegisterModal = () => {
   const onChangePassword = (e) => {
     setState({ ...state, password: e.target.value });
   };
+  const onChangeRepassword = (e) => {
+    setState({ ...state, repassword: e.target.value });
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
     setState({ ...state, successful: false });
 
-    dispatch(register(state.name, state.email, state.password))
+    dispatch(register(state.name, state.email, state.password, state.repassword))
       .then(() => {
         setState({ ...state, successful: true });
       })
@@ -108,6 +112,20 @@ const RegisterModal = () => {
                 value={state.password}
                 onChange={onChangePassword}
                 placeholder="Nhập mật khẩu của bạn..."
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="repassword" className="login-modal__label">
+              Nhập lại mật khẩu
+              </label>
+              <Input
+                type="password"
+                className="form-control"
+                name="repassword"
+                value={state.repassword}
+                onChange={onChangeRepassword}
+                placeholder="Nhập lại mật khẩu của bạn..."
                 required
               />
             </div>

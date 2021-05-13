@@ -10,7 +10,7 @@ import JobService from "services/job";
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
-    JobService.getAll().then((data) => setJobs(data));
+    JobService.get().then((data) => setJobs(data?.data));
   }, []);
   return (
     <div className="jobs-page not-fluid">

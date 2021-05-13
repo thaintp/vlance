@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { openSigninModal, openSignupModal } from "actions/modal";
 
 const AuthButtons = () => {
-  const { account } = useSelector((state) => state.auth);
+  const { isLoggedIn, account } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   return (
     <div className="auth-buttons">
-      {account ? (
+      {isLoggedIn ? (
         <Account account={account} />
       ) : (
         <>

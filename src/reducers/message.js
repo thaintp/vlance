@@ -7,7 +7,7 @@ const messageReducer = (state = initialState, action) => {
 
   switch (type) {
     case SET_MESSAGE:
-      return { message: payload };
+      return { message: payload.message };
 
     case CLEAR_MESSAGE:
       return { message: "" };

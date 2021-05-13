@@ -103,6 +103,17 @@
   box-shadow: 0 5px 20px 0 rgba(61, 61, 63, 0.2);
   border: solid 2px $white;
 }
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+  }
+  80% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
 .account__dropdown {
   display: none;
   background-color: $white-five;
@@ -112,6 +123,8 @@
   z-index: 1;
   box-shadow: 0 14px 30px 0 rgba(0, 0, 0, 0.14);
   padding: 7px 13px;
+  animation: growDown 300ms ease-in-out forwards;
+  transform-origin: top center;
 }
 .account__action {
   display: block;

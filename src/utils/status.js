@@ -1,6 +1,7 @@
 export const map_status = {
-  offer: "Chào giá",
-  pending: "Đang làm",
-  completed: "Đã hoàn thành",
-  canceled: "Đã hủy",
+  0: "Chào giá",
+  1: "Tạm khóa",
+  2: "Đã hủy",
+  3: "Đang làm",
+  4: "Hoàn thành",
 };

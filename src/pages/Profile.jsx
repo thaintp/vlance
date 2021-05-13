@@ -1,10 +1,31 @@
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'
+import JobService from "services/job";
+import { map_status } from "utils/status";
 
 const Profile = () => {
-    return (
+    const { id } = useParams();
+    const [ account, setAccount ] = useState({});
+    const [eJobs, setEJobs] = useState([]);
+    const [fJobs, setFJobs] = useState([]);
+    const auth = useSelector((state) => state.auth);
+    useEffect(() => {
+        if (id) {
+            
+        } else {
+            setAccount(auth.account);
+        }
+    }, [])
+    useEffect(() => {
+        JobService.get({ employer_id: account.id }).then((data) => setEJobs(data.data));
+        JobService.get({ freelancer_id: account.id }).then((data) => setFJobs(data.data));
+    }, [account])
+    return (account ?
         <html lang="en">
             <head>
                 <base href="../../../" />
-                <meta charset="utf-8" />
+                <meta charSet="utf-8" />
                 <title>Profile 3 | Keenthemes</title>
                 <meta name="description" content="User profile block example" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -36,7 +57,7 @@ const Profile = () => {
                                                     <div class="flex-grow-1">
                                                         <div class="d-flex justify-content-between flex-wrap mt-1">
                                                             <div class="d-flex mr-3">
-                                                                <a href="/#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">Jason Muller</a>
+                                                                <a href="/#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">{account.name}</a>
                                                                 <a href="/#"><i class="flaticon2-correct text-success font-size-h5"></i></a>
                                                             </div>
                                                             <div class="my-lg-0 my-3">
@@ -48,15 +69,15 @@ const Profile = () => {
                                                             <div class="d-flex flex-column flex-grow-1 pr-8">
                                                                 <div class="d-flex flex-wrap mb-4">
                                                                     <a href="/#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                                                                        <i class="flaticon2-new-email mr-2 font-size-lg"></i>jason@siastudio.com</a>
+                                                                        <i class="flaticon2-new-email mr-2 font-size-lg"></i>{account.email}</a>
                                                                     <a href="/#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                                                                         <i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>PR Manager</a>
                                                                     <a href="/#"
                                                                         class="text-dark-50 text-hover-primary font-weight-bold">
                                                                         <i class="flaticon2-placeholder mr-2 font-size-lg"></i>Melbourne</a>
                                                                 </div>
-                                                                <span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
-                                                                <span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
+                                                                <span class="font-weight-bold text-dark-50">{account.user_information?.bio}</span>
+                                                                <span class="font-weight-bold text-dark-50">{account.user_information?.experience}</span>
                                                             </div>
 
                                                         </div>
@@ -296,7 +317,10 @@ const Profile = () => {
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
+                                                                            {/* List jobs here */}
+                                                                            {
+                                                                                [...eJobs, ...fJobs].map(job => (
+                                                                                    <tr key={job.id}>
                                                                                 <td class="pl-0 py-4">
                                                                                     <div class="symbol symbol-50 symbol-light mr-1">
                                                                                         <span class="symbol-label">
@@ -308,17 +332,17 @@ const Profile = () => {
                                                                                 </td>
                                                                                 <td class="pl-0">
                                                                                     <a href="/#"
-                                                                                        class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Sant Outstanding</a>
+                                                                                        class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">{job.title}</a>
                                                                                     <div>
                                                                                         <span
                                                                                             class="font-weight-bolder">Email:</span>
                                                                                         <a class="text-muted font-weight-bold text-hover-primary"
-                                                                                            href="/#">bprow@bnc.cc</a>
+                                                                                            href="/#">{job.employer_detail?.email}</a>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td class="text-right">
                                                                                     <span
-                                                                                        class="text-dark-75 font-weight-bolder d-block font-size-lg">$2,000,000</span>
+                                                                                        class="text-dark-75 font-weight-bolder d-block font-size-lg">{job.expect_balance}</span>
                                                                                     <span
                                                                                         class="text-muted font-weight-bold">Paid</span>
                                                                                 </td>
@@ -329,9 +353,11 @@ const Profile = () => {
                                                                                 </td>
                                                                                 <td class="text-right">
                                                                                     <span
-                                                                                        class="label label-lg label-light-primary label-inline">Approved</span>
+                                                                                        class="label label-lg label-light-primary label-inline">{map_status[job.status]}</span>
                                                                                 </td>
                                                                             </tr>
+                                                                        ))
+                                                                    }
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -539,7 +565,7 @@ const Profile = () => {
                     </path>
                 </svg>
             </body>
-        </html>
+        </html> : <></>
     );
 };
 

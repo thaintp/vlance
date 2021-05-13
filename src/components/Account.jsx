@@ -9,7 +9,7 @@ const Account = ({ account, size }) => {
   return (
     <div className="account">
       <img
-        src={account?.avatar}
+        src={account?.avatar ?? "https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"}
         alt="avatar"
         className="account__avatar"
         style={{
@@ -19,10 +19,13 @@ const Account = ({ account, size }) => {
       />
       <div className="account__dropdown">
         <Link className="account__action" to="/profile">
-          Chỉnh sửa thông tin
+        Thông tin tài khoản
         </Link>
-        <Link className="account__action" to="/job-manager">
-          Quản lý công việc
+        <Link className="account__action" to="/job-manager/employer">
+          Công việc đã đăng
+        </Link>
+        <Link className="account__action" to="/job-manager/freelancer">
+          Công việc làm
         </Link>
         <Link
           className="account__action"

@@ -1,4 +1,4 @@
-// import axios from "utils/axios";
+import axios from "utils/axios";
 
 const fake = [
   {
@@ -57,14 +57,21 @@ class JobService {
   async getAll() {
     return fake;
   }
-  async getByID(id) {
-    return fake.filter((x) => x.id === id)[0];
+  async getByID(id, filter = {}) {
+    return await axios({
+      method: "GET",
+      url: `job/${id}`,
+      params: filter
+    }).then(res => res.data).catch(err => console.error(err));
+  }
+  async get(filter = {}) {
+    return await axios({
+      method: "GET",
+      url: `/job`,
+      params: filter,
+    }).then(response => response.data).catch(error => console.error(error));
   }
   async getByState(state) {
-    console.log(
-      "🚀 ~ file: job.js ~ line 64 ~ JobService ~ getByState ~ state",
-      state
-    );
     return fake.filter((x) => x.state === state);
   }
 }

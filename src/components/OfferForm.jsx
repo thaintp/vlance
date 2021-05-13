@@ -3,9 +3,58 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { FaPhoneAlt, FaSkype } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { useRef } from 'react';
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import OfferService from 'services/offer';
+import Toast from 'utils/toast';
+import { timeToDay } from 'utils/date'
 
-const OfferForm = () => {
+const OfferForm = ({ job, setCanOffer }) => {
+  const { account } = useSelector(state => state.auth);
+  const balanceRef = useRef();
+  const expectDayRef = useRef();
+  const expRef = useRef();
+  const stepRef = useRef();
+  const phoneRef = useRef();
+  const mailRef = useRef();
+
+  useEffect(() => {
+    if (account) {
+      mailRef.current.value = account.email;
+      if (account.user_information) {
+        phoneRef.current.value = account.user_information.phone
+      }
+    }
+    
+  }, [account])
+
+  const handleOffer = () => {
+    OfferService.make(
+      job.id,
+      balanceRef.current.value,
+      timeToDay(expectDayRef.current.value),
+      phoneRef.current.value,
+      mailRef.current.value,
+      expRef.current.value,
+      stepRef.current.value,
+    ).then((res) =>  {
+      if (res.status) {
+        Toast.fire({
+          icon: "success",
+          title: "Chào giá thành công",
+        })
+        setCanOffer(false);
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Chào giá thất bại",
+        })
+        setCanOffer(true);
+      }
+    })
+  }
   return (
     <div className="offer-form">
       <div className="offer-form__title">THÔNG TIN CHÀO GIÁ</div>
@@ -24,6 +73,8 @@ const OfferForm = () => {
                   className="form-control"
                   name="expected_price"
                   placeholder="500000"
+                  defaultValue="500000"
+                  ref={balanceRef}
                   required
                 />
               </div>
@@ -34,7 +85,7 @@ const OfferForm = () => {
                 >
                   Dự kiến hoàn thành trong:
                 </label>{" "}
-                <select name="expected_time form-control">
+                <select name="expected_time form-control" ref={expectDayRef}>
                   <option value="1 ngày">1 ngày</option>
                   <option value="3 ngày">3 ngày</option>
                   <option value="5 ngày">5 ngày</option>
@@ -61,20 +112,22 @@ const OfferForm = () => {
                         className="form-control"
                         name="phone"
                         placeholder="Số điện thoại"
+                        ref={phoneRef}
                         required
-                      />
+                        />
                     </div>
                   </Col>
                   <Col className="pr-0">
                     <div className="form-group offer-form__prettyInput">
-                      <label htmlFor="skype">
-                        <FaSkype></FaSkype>
+                      <label htmlFor="email">
+                        <FaEnvelope></FaEnvelope>
                       </label>
                       <input
                         type="link"
                         className="form-control"
-                        name="skype"
-                        placeholder="Link skype"
+                        name="email"
+                        placeholder="Địa chỉ email"
+                        ref={mailRef}
                         required
                       />
                     </div>
@@ -87,7 +140,7 @@ const OfferForm = () => {
                   của vLanceJob, và không để lộ bất kỳ thông tin liên lạc cá
                   nhân nào trong phần đề xuất thuyết phục khách hàng.
                 </div>
-                <Button className="btn-warning w-100 mt-3">Gửi chào giá</Button>
+                <Button className="btn-warning w-100 mt-3" onClick={() => handleOffer()}>Gửi chào giá</Button>
               </div>
             </Col>
             <Col xs={6} className="pr-0">
@@ -104,10 +157,11 @@ const OfferForm = () => {
                   rows="4"
                   cols="50"
                   className="form-textarea"
+                  ref={expRef}
                   placeholder="- Tôi đã có xx năm kinh nghiệm trong lĩnh vực...
-- Tôi sử dụng thành thạo các công cụ như...
-- Tôi đã từng thực hiện những dự án tương tự..."
-                ></textarea>
+                  - Tôi sử dụng thành thạo các công cụ như...
+                  - Tôi đã từng thực hiện những dự án tương tự..."
+                  ></textarea>
               </div>
               <div className="form-group">
                 <label htmlFor="plan" className="offer-form__label">
@@ -118,6 +172,7 @@ const OfferForm = () => {
                   rows="4"
                   cols="50"
                   className="form-textarea"
+                  ref={stepRef}
                   placeholder="- Đầu tiên tôi sẽ...
 - Sau đó tôi sẽ...
 - Tôi tin tưởng có thể hoàn thành đúng theo kế hoạch...

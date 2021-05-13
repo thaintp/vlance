@@ -4,19 +4,23 @@ class AuthService {
   async login(email, password) {
     return await axios({
       method: "POST",
-      url: "/auth/signin",
+      url: "/auth/login",
       data: { email, password },
     }).then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+      if (response.data.access_token) {
+        localStorage.setItem("token", JSON.stringify(response.data.access_token));
+        localStorage.setItem("user", JSON.stringify(response.data.user_record));
+        return response.data;
+      } else {
+        throw "Email / Password invalid"
       }
-
-      return response.data;
+      
     });
   }
 
   logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
   }
 
   async update() {
@@ -25,18 +29,32 @@ class AuthService {
       url: "/auth/update",
       data: { method: "post" },
     }).then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+      if (response.data.access_token) {
+        localStorage.setItem("token", JSON.stringify(response.data.access_token));
+        localStorage.setItem("user", JSON.stringify(response.data.user_record));
       }
       return response.data;
     });
   }
 
-  async register(name, email, password) {
+  async register(name, email, password, repassword) {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('repassword', repassword);
     return await axios({
       method: "POST",
-      url: "/auth/signup",
-      data: { name, email, password },
+      url: '/user',
+      data: {
+        name, email, password, repassword
+      },
+    }).then(response => {
+      if (response.data.status === false) {
+        throw "Username or Email already exist"
+      } else {
+        return "Account registered successfully"
+      }
     });
   }
 }

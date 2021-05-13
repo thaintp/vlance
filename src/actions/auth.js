@@ -9,16 +9,16 @@ import {
 
 import AuthService from "../services/auth";
 
-export const register = (name, email, password) => (dispatch) => {
-  return AuthService.register(name, email, password).then(
-    (response) => {
+export const register = (name, email, password, repassword) => (dispatch) => {
+  return AuthService.register(name, email, password, repassword).then(
+    (message) => {
       dispatch({
         type: REGISTER_SUCCESS,
       });
 
       dispatch({
         type: SET_MESSAGE,
-        payload: response.data.message,
+        payload: {message},
       });
 
       return Promise.resolve();
@@ -37,7 +37,7 @@ export const register = (name, email, password) => (dispatch) => {
 
       dispatch({
         type: SET_MESSAGE,
-        payload: message,
+        payload: {message},
       });
 
       return Promise.reject();
@@ -61,7 +61,7 @@ export const login = (email, password) => (dispatch) => {
     (data) => {
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: { account: data },
+        payload: data,
       });
 
       return Promise.resolve();
@@ -80,7 +80,7 @@ export const login = (email, password) => (dispatch) => {
 
       dispatch({
         type: SET_MESSAGE,
-        payload: message,
+        payload: { message },
       });
 
       return Promise.reject();

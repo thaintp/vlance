@@ -59,40 +59,40 @@ const ProjectInfo = ({ job }) => {
           <Col xs={4}>
             <Link
               className="project-info__avatar"
-              to={`/users/${job.employer?.id}`}
+              to={`/users/${job.employer_detail?.id}`}
             >
-              <img src={job.employer?.avatar} alt="avatar" />
+              <img src={job.employer_detail?.avatar ?? "https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"} alt="avatar" />
             </Link>
           </Col>
           <Col xs={8} className="project-info__employer__info">
             <Link
               className="project-info__employer__name"
-              to={`/users/${job.employer?.id}`}
+              to={`/users/${job.employer_detail?.id}`}
             >
-              {job.employer?.name}
+              {job.employer_detail?.name}
             </Link>
-            <div className="project-info__jobTitle">{job.employer?.job}</div>
+            <div className="project-info__jobTitle">{job.employer_detail?.job}</div>
           </Col>
         </Row>
         <Row>
           <Col xs={3} className="project-info__field mb-2">
             Đến từ
           </Col>
-          <Col xs={9}>{job.employer?.city}</Col>
+          <Col xs={9}>{job.employer_detail?.user_information?.address}</Col>
         </Row>
         <Row>
           <Col xs={3} className="project-info__field mb-2">
-            Tham gia
+            Email
           </Col>
-          <Col xs={9}>{job.employer?.created_at}</Col>
+          <Col xs={9}>{job.employer_detail?.email}</Col>
         </Row>
         <Row>
           <Col xs={3} className="project-info__field mb-2">
             Đã đăng
           </Col>
           <Col xs={9}>
-            <Link to={`/users/${job.employer?.id}/posts`}>
-              {job.employer?.posted} việc
+            <Link to={`/users/${job.employer_detail?.id}/posts`}>
+              {job.employer_detail?.posted} việc
             </Link>
           </Col>
         </Row>

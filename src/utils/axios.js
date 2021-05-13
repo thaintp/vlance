@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "services/auth-header";
 
-const API_URL = process.env.API_URL ?? "http://localhost:7070/api";
+const API_URL = process.env.API_URL ?? "http://localhost/api";
 
 const instance = axios.create({
   baseURL: API_URL,

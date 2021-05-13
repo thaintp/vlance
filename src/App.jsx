@@ -24,7 +24,7 @@ function App() {
           <Route exact path="/jobs">
             <Jobs></Jobs>
           </Route>
-          <Route path="/job-manager">
+          <Route path="/job-manager/:role">
             <JobManager></JobManager>
           </Route>
           <Route path="/jobs/:id">
@@ -34,6 +34,9 @@ function App() {
             <PostJob></PostJob>
           </Route>
           <Route path="/profile">
+            <Profile></Profile>
+          </Route>
+          <Route path="/users/:id">
             <Profile></Profile>
           </Route>
           <Route path="/edit-profile">

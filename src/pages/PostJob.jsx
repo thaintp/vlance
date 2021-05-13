@@ -1,5 +1,5 @@
 import MyButton from "components/MyButton";
-import { FaLock } from "@react-icons/all-files/fa/FaLock";
+import { FaLock } from "react-icons/fa";
 import "./postjob.scss";
 
 const PostJob = () => {
