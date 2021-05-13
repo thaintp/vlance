@@ -5,6 +5,7 @@ import {
   Step1,
   Step2,
   Step3,
+  Conversation,
 } from "components";
 
 const Home = () => {
@@ -34,6 +35,10 @@ const Home = () => {
         <div className="not-fluid">
           <Step3 />
         </div>
+      </div>
+
+      <div className="not-fluid">
+        <Conversation />
       </div>
     </div>
   );
