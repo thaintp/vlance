@@ -61,16 +61,21 @@ class JobService {
     return await axios({
       method: "GET",
       url: `job/${id}`,
-      params: filter
-    }).then(res => res.data).catch(err => console.error(err));
+      params: filter,
+    })
+      .then((res) => res.data)
+      .catch((err) => console.error(err));
   }
-  async get(filter = {}) {
+  async getJobMamangement(filter = {}) {
     return await axios({
       method: "GET",
       url: `/job`,
       params: filter,
-    }).then(response => response.data).catch(error => console.error(error));
+    })
+      .then((response) => response.data)
+      .catch((error) => console.error(error));
   }
+
   async getByState(state) {
     return fake.filter((x) => x.state === state);
   }
