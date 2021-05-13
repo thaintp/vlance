@@ -9,9 +9,13 @@ function App() {
   return (
     <div className="App">
       <Router history={history}>
-        <TopBar></TopBar>
+        <div className="not-fluid">
+          <TopBar></TopBar>
+        </div>
         <hr />
-        <NavBar></NavBar>
+        <div className="not-fluid">
+          <NavBar></NavBar>
+        </div>
         <hr />
         <Switch>
           <Route exact path="/">

@@ -12,7 +12,7 @@ const JobDetail = () => {
     JobService.getByID(parseInt(id)).then((data) => setJob(data));
   }, [id]);
   return (
-    <div className="job-detail">
+    <div className="job-detail not-fluid">
       <Detail className="job-detail__detail" job={job} />
       <OfferForm></OfferForm>
       <OfferList />
