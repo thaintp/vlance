@@ -10,8 +10,11 @@ const OfferItem = ({ offer, isAuthor }) => {
   //const user_id = useSelector((state) => state.auth.user);
   const freelancer = offer.freelancer_detail;
   const fakeSkills =
+    freelancer.user_information &&
     freelancer.user_information.skill &&
-    freelancer.user_information.skill.split("|");
+    (freelancer.user_information.skill != null
+      ? freelancer.user_information.skill.split("|")
+      : []);
   console.log("is author", isAuthor);
   return (
     <>
@@ -54,7 +57,10 @@ const OfferItem = ({ offer, isAuthor }) => {
               <Col>
                 <Link to="/user/{freelancer.id}">
                   <div className="offer-item__full-name">
-                    {freelancer.user_information.fullname}
+                    {freelancer.user_information &&
+                      (freelancer.user_information.fullname != null
+                        ? freelancer.user_information.fullname
+                        : freelancer.name)}
                   </div>
                 </Link>
               </Col>
@@ -104,7 +110,9 @@ const OfferItem = ({ offer, isAuthor }) => {
               <Col xs={5} className="offer-item__field">
                 Ngày gia nhập
               </Col>
-              <Col className="offer-item__field-value">05/05/2021</Col>
+              <Col className="offer-item__field-value">
+                {freelancer.created_at ?? "14/05/2021"}
+              </Col>
             </Row>
             <Row>
               <Col xs={5} className="offer-item__field">

@@ -8,13 +8,15 @@ class AuthService {
       data: { email, password },
     }).then((response) => {
       if (response.data.access_token) {
-        localStorage.setItem("token", JSON.stringify(response.data.access_token));
+        localStorage.setItem(
+          "token",
+          JSON.stringify(response.data.access_token)
+        );
         localStorage.setItem("user", JSON.stringify(response.data.user_record));
         return response.data;
       } else {
-        throw "Email / Password invalid"
+        throw "Email / Password invalid";
       }
-      
     });
   }
 
@@ -30,30 +32,39 @@ class AuthService {
       data: { method: "post" },
     }).then((response) => {
       if (response.data.access_token) {
-        localStorage.setItem("token", JSON.stringify(response.data.access_token));
+        localStorage.setItem(
+          "token",
+          JSON.stringify(response.data.access_token)
+        );
         localStorage.setItem("user", JSON.stringify(response.data.user_record));
       }
       return response.data;
     });
   }
 
-  async register(name, email, password, repassword) {
+  async register(name, email, password, repassword, fullname, phone, address) {
     const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('repassword', repassword);
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("repassword", repassword);
     return await axios({
       method: "POST",
-      url: '/user',
+      url: "/user",
       data: {
-        name, email, password, repassword
+        name,
+        email,
+        password,
+        repassword,
+        fullname,
+        phone,
+        address,
       },
-    }).then(response => {
+    }).then((response) => {
       if (response.data.status === false) {
-        throw "Username or Email already exist"
+        throw "Username or Email already exist";
       } else {
-        return "Account registered successfully"
+        return "Account registered successfully";
       }
     });
   }

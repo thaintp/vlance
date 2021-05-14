@@ -12,7 +12,7 @@ import { OfferItem } from "components";
 const JobDetail = ({ match }) => {
   const { id } = match.params;
   const [job, setJob] = useState({});
-  const { isLoggedIn } = useSelector((state) => state.auth.account);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const { account } = useSelector((state) => state.auth);
   const [canOffer, setCanOffer] = useState(false);
   const [offers, setOffers] = useState([]);
@@ -80,7 +80,7 @@ const JobDetail = ({ match }) => {
             <OfferItem
               key={idx}
               offer={_offer}
-              isAuthor={account.id === job.employer_id}
+              isAuthor={account && account.id === job.employer_id}
             />
           ))}
       </div>
