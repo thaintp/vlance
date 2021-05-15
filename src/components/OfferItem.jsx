@@ -7,7 +7,8 @@ import Rating from "react-rating";
 import { Link } from "react-router-dom";
 import {toString} from 'utils/date'
 
-const OfferItem = ({ offer }) => {
+const OfferItem = ({ offer, isAuthor }) => {
+const freelancer = offer.freelancer_detail;
   return (
     <div className="offer-item">
       <Row>
@@ -20,43 +21,49 @@ const OfferItem = ({ offer }) => {
                   src="https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"
                   alt="avatar"
                 />
-              </Link>
-            </Col>
-            <Col>
-              <Rating
-                readonly
-                initialRating={3}
-                emptySymbol={
-                  <img
-                    src="/images/star-empty.png"
-                    className="offer-item__rating-icon"
-                    alt=""
-                  />
-                }
-                fullSymbol={
-                  <img
-                    src="/images/star-full.png"
-                    className="offer-item__rating-icon"
-                    alt=""
-                  />
-                }
-              />
-            </Col>
-          </Row>
-        </Col>
+              </Col>
+              <Col>
+                <Rating
+                  readonly
+                  initialRating={3}
+                  emptySymbol={
+                    <img
+                      src="/images/star-empty.png"
+                      className="offer-item__rating-icon"
+                      alt=""
+                    />
+                  }
+                  fullSymbol={
+                    <img
+                      src="/images/star-full.png"
+                      className="offer-item__rating-icon"
+                      alt=""
+                    />
+                  }
+                />
+              </Col>
+            </Row>
+          </Col>
 
         <Col>
           <Row>
             <Col>
               <Link to={`/users/${offer.freelancer_id}`}>
-                <div className="offer-item__full-name">{offer.freelancer_detail.name}</div>
+                <div className="offer-item__full-name">{freelancer.user_information &&
+                      (freelancer.user_information.fullname != null
+                        ? freelancer.user_information.fullname
+                        : freelancer.name)}</div>
               </Link>
             </Col>
-            <Col xs="auto">
-              <Button className="btn-success" size="md">
-                Liên hệ
-              </Button>
-            </Col>
+                          <Col xs="auto">
+                {isAuthor && isAuthor === true ? (
+                  <Button className="btn-success" size="md">
+                    Chọn ứng viên
+                  </Button>
+                ) : (
+                  ""
+                )}
+              </Col>
           </Row>
           <Row>
             <Col>

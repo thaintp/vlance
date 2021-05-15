@@ -41,7 +41,7 @@ const OfferList = ({ offerList }) => {
       </div>
 
       {offerList.map((offer) => (
-        <OfferItem offer={offer} />
+        <OfferItem offer={offer} key={offer.id} />
       ))}
     </div>
   );
