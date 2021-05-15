@@ -1,7 +1,16 @@
 import "App.scss";
 
 import { Router, Switch, Route, Redirect } from "react-router-dom";
-import { Home, Jobs, JobDetail, JobManager, PostJob, Profile, EditProfile, ChangePassword } from "pages";
+import {
+  Home,
+  Jobs,
+  JobDetail,
+  JobManager,
+  PostJob,
+  Profile,
+  EditProfile,
+  ChangePassword,
+} from "pages";
 import { TopBar, NavBar } from "components";
 import { history } from "./helpers/history";
 
@@ -27,9 +36,7 @@ function App() {
           <Route path="/job-manager/:role">
             <JobManager></JobManager>
           </Route>
-          <Route path="/jobs/:id">
-            <JobDetail></JobDetail>
-          </Route>
+          <Route path="/jobs/:id" component={JobDetail} />
           <Route path="/postjob">
             <PostJob></PostJob>
           </Route>

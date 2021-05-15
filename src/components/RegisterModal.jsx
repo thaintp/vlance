@@ -19,6 +19,9 @@ const RegisterModal = () => {
     email: "",
     password: "",
     repassword: "",
+    fullname: "",
+    phone: "",
+    address: "",
     successful: false,
   });
 
@@ -41,12 +44,31 @@ const RegisterModal = () => {
   const onChangeRepassword = (e) => {
     setState({ ...state, repassword: e.target.value });
   };
+  const onChangeFullName = (e) => {
+    setState({ ...state, fullname: e.target.value });
+  };
+  const onChangePhone = (e) => {
+    setState({ ...state, phone: e.target.value });
+  };
+  const onChangeAddress = (e) => {
+    setState({ ...state, address: e.target.value });
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
     setState({ ...state, successful: false });
 
-    dispatch(register(state.name, state.email, state.password, state.repassword))
+    dispatch(
+      register(
+        state.name,
+        state.email,
+        state.password,
+        state.repassword,
+        state.fullname,
+        state.phone,
+        state.address
+      )
+    )
       .then(() => {
         setState({ ...state, successful: true });
       })
@@ -73,7 +95,7 @@ const RegisterModal = () => {
           <Form onSubmit={(e) => handleRegister(e)} ref={form}>
             <div className="form-group">
               <label htmlFor="name" className="login-modal__label">
-                Tên
+                Username
               </label>
               <Input
                 type="text"
@@ -81,7 +103,51 @@ const RegisterModal = () => {
                 name="name"
                 value={state.name}
                 onChange={onChangeName}
-                placeholder="Nhập tên của bạn..."
+                placeholder="Nhập tên đăng nhập..."
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="name" className="login-modal__label">
+                Họ và tên
+              </label>
+              <Input
+                type="text"
+                className="form-control"
+                name="name"
+                value={state.fullname}
+                onChange={onChangeFullName}
+                placeholder="Nhập họ và tên..."
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="name" className="login-modal__label">
+                Số điện thoại
+              </label>
+              <Input
+                type="text"
+                className="form-control"
+                name="name"
+                value={state.phone}
+                onChange={onChangePhone}
+                placeholder="Số điện thoại..."
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="name" className="login-modal__label">
+                Địa chỉ
+              </label>
+              <Input
+                type="text"
+                className="form-control"
+                name="name"
+                value={state.address}
+                onChange={onChangeAddress}
+                placeholder="Địa chỉ..."
                 required
               />
             </div>
@@ -117,7 +183,7 @@ const RegisterModal = () => {
             </div>
             <div className="form-group">
               <label htmlFor="repassword" className="login-modal__label">
-              Nhập lại mật khẩu
+                Nhập lại mật khẩu
               </label>
               <Input
                 type="password"

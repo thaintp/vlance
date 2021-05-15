@@ -2,9 +2,21 @@ import "./style.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { OfferItem } from "components";
+import { useState, useEffect } from "react";
+import OfferService from "services/offer";
 
-const OfferList = () => {
-  const fake = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const OfferList = ({ job }) => {
+  console.log("[OfferList] Offer list render pass job is: ", job);
+
+  const [offers, setOffers] = useState([]);
+  useEffect(() => {
+    OfferService.getOffersAPI({ job_id: job.id }).then((json) => {
+      const res_data = json.data;
+      console.log("Job in offer service: ", job);
+      setOffers(res_data.data);
+      console.log("offers is : ", offers);
+    });
+  }, [job]);
   return (
     <div className="offer-list">
       <div className="offer-list__head">
@@ -37,9 +49,8 @@ const OfferList = () => {
         </Row>
       </div>
 
-      {fake.map(() => (
-        <OfferItem />
-      ))}
+      {offers &&
+        offers.map((_offer, idx) => <OfferItem key={idx} offer={_offer} />)}
     </div>
   );
 };

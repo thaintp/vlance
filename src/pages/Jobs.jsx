@@ -3,15 +3,30 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
+import Pagination from "react-js-pagination";
 
-import { Category, Filter, Pagination, JobList } from "components";
+import { Category, Filter, JobList, CustomPagination } from "components";
 import JobService from "services/job";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
+  const [currentPages, setCurrentPages] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(100);
+
+  const onPageChange = (page_data) => {
+    const { currentPage, totalPages, pageLimit } = page_data;
+    setCurrentPages(currentPage);
+  };
+
   useEffect(() => {
-    JobService.get().then((data) => setJobs(data?.data));
-  }, []);
+    JobService.get({ page: currentPages }).then((data) => {
+      setJobs(data?.data);
+      const { current_page, per_page, total } = data?.meta;
+      setTotalRecords(total);
+      console.log("Total", total);
+    });
+  }, [currentPages]);
+
   return (
     <div className="jobs-page not-fluid">
       <Container fluid>
@@ -35,7 +50,13 @@ const Jobs = () => {
                 <JobList jobs={jobs}></JobList>
               </Row>
               <Row>
-                <Pagination current={parseInt(1)} max={parseInt(10)} />
+                <CustomPagination
+                  key={totalRecords}
+                  totalRecords={totalRecords}
+                  pageLimit={10}
+                  pageNeighbours={1}
+                  onPageChanged={(page_data) => onPageChange(page_data)}
+                />
               </Row>
             </Container>
           </Col>

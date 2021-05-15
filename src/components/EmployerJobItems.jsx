@@ -3,16 +3,27 @@ import Table from "react-bootstrap/Table";
 import { EmployerJobItem } from "components";
 import { useState, useEffect } from "react";
 import JobService from "services/job";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 const EmployerJobItems = ({ tab, role }) => {
   const [jobs, setJobs] = useState([]);
-  const { account } = useSelector(state => state.auth);
+  const { account } = useSelector((state) => state.auth);
   useEffect(() => {
+    console.log("Tab", tab);
     if (role === "employer") {
-      JobService.get({ employer_id: account.id, status: tab }).then((data) => setJobs(data.data));
+      //{employer_id, status}
+      JobService.get({
+        employer_id: account.id,
+        status: tab,
+      }).then((data) => setJobs(data.data));
     } else {
-      JobService.get({ freelancer_id: account.id, status: tab }).then((data) => setJobs(data.data));
+      JobService.get({
+        freelancer_id: account.id,
+        status: tab,
+      }).then((data) => {
+        console.log(data);
+        setJobs(data.data);
+      });
     }
   }, [tab, role, account]);
 
