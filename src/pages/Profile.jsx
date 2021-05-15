@@ -58,7 +58,7 @@ const Profile = () => {
                                                     <div class="flex-grow-1">
                                                         <div class="d-flex justify-content-between flex-wrap mt-1">
                                                             <div class="d-flex mr-3">
-                                                                <a href="/#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">{account.name}</a>
+                                                                <a href="/#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">{account.user_information?.fullname}</a>
                                                                 <a href="/#"><i class="flaticon2-correct text-success font-size-h5"></i></a>
                                                             </div>
                                                             <div class="my-lg-0 my-3">

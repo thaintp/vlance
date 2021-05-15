@@ -72,7 +72,7 @@ const ProjectInfo = ({ job }) => {
               className="project-info__employer__name"
               to={`/users/${job.employer_detail?.id}`}
             >
-              {job.employer_detail?.name}
+              {job.employer_detail?.user_information?.fullname}
             </Link>
             <div className="project-info__jobTitle">{job.employer_detail?.job}</div>
           </Col>

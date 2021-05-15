@@ -1,9 +1,14 @@
 import MyButton from "components/MyButton";
 import { FaLock } from "react-icons/fa";
 import "./postjob.scss";
+import {useSelector} from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
 const PostJob = () => {
+  const {isLoggedIn} = useSelector(state => state.auth);
+
   return (
+    isLoggedIn ?
     <form
       className="form fv-plugins-bootstrap fv-plugins-framework"
       id="kt_projects_add_form"
@@ -393,6 +398,7 @@ const PostJob = () => {
         </div>
       </div>
     </form>
+    : <Redirect to="/"/>
   );
 };
 

@@ -5,9 +5,6 @@ import { useState, useEffect } from "react";
 import JobService from "services/job";
 import OfferService from "services/offer";
 import { useSelector } from "react-redux";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { OfferItem } from "components";
 
 const JobDetail = ({ match }) => {
   const { id } = match.params;
@@ -19,9 +16,9 @@ const JobDetail = ({ match }) => {
 
   useEffect(() => {
     JobService.getByID(parseInt(id)).then((data) => setJob(data.data));
-    OfferService.get({id}).then(data => setOfferList(data.data));
+    OfferService.get({job_id: id}).then(data => setOfferList(data.data));
   }, [id]);
-
+  
   useEffect(() => {
     if (isLoggedIn) {
       OfferService.checkCanOffer(id).then((data) => setCanOffer(data));
@@ -30,11 +27,15 @@ const JobDetail = ({ match }) => {
     }
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    OfferService.get({job_id: id}).then(data => setOfferList(data.data));
+  }, [canOffer, isLoggedIn])
+
   return (
     <div className="job-detail not-fluid">
       <Detail className="job-detail__detail" job={job} />
       { canOffer && <OfferForm job={job} setCanOffer={setCanOffer}></OfferForm>}
-      <OfferList offerList={offerList} />
+      <OfferList offerList={offerList} isAuthor={account && job.employer_id === account.id} />
     </div>
   );
 };

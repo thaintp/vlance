@@ -21,6 +21,7 @@ const freelancer = offer.freelancer_detail;
                   src="https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"
                   alt="avatar"
                 />
+                </Link>
               </Col>
               <Col>
                 <Rating
@@ -76,8 +77,8 @@ const freelancer = offer.freelancer_detail;
               <div>
                 <span className="offer-item__field">Kỹ năng:&nbsp;&nbsp;</span>
                 <span className="offer-item__field-value">
-                  {offer.freelancer_detail.user_information.skill.split("|").map((skill) => (
-                    <Link>
+                  {offer.freelancer_detail.user_information.skill.split("|").map((skill, index) => (
+                    <Link to="#/" key={index}>
                       <Badge pill variant="secondary">
                         {skill}
                       </Badge>
