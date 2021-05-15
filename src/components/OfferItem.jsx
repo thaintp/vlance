@@ -5,36 +5,16 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
+import {toString} from 'utils/date'
 
-const OfferItem = () => {
-  const fakeSkills = [
-    "AJAX",
-    "Facebook API",
-    "HTML",
-    "HTML5",
-    "Javascript",
-    "JSON",
-    "MongoDB",
-    "MySQL",
-    "PHP",
-    "Wordpress",
-    "Facebook Ad",
-    "AngularJS",
-    "Node.js",
-    "Laravel",
-    "Lập trình web",
-    "Quản lý website",
-    "React.js",
-    "Haravan",
-  ];
-
+const OfferItem = ({ offer }) => {
   return (
     <div className="offer-item">
       <Row>
         <Col lg={2} className="offer-item__sec--center">
           <Row>
             <Col xs="12">
-              <Link>
+              <Link to={`/users/${offer.freelancer_id}`}>
                 <img
                   className="offer-item__avatar"
                   src="https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"
@@ -68,8 +48,8 @@ const OfferItem = () => {
         <Col>
           <Row>
             <Col>
-              <Link>
-                <div className="offer-item__full-name">Dev Ed</div>
+              <Link to={`/users/${offer.freelancer_id}`}>
+                <div className="offer-item__full-name">{offer.freelancer_detail.name}</div>
               </Link>
             </Col>
             <Col xs="auto">
@@ -80,7 +60,7 @@ const OfferItem = () => {
           </Row>
           <Row>
             <Col>
-              <div className="offer-item__job-title">Software Engineer</div>
+              <div className="offer-item__job-title">{offer.freelancer_detail.user_information.bio}</div>
             </Col>
           </Row>
 
@@ -89,7 +69,7 @@ const OfferItem = () => {
               <div>
                 <span className="offer-item__field">Kỹ năng:&nbsp;&nbsp;</span>
                 <span className="offer-item__field-value">
-                  {fakeSkills.map((skill) => (
+                  {offer.freelancer_detail.user_information.skill.split("|").map((skill) => (
                     <Link>
                       <Badge pill variant="secondary">
                         {skill}
@@ -108,29 +88,29 @@ const OfferItem = () => {
             <Col xs={5} className="offer-item__field">
               Đến từ
             </Col>
-            <Col className="offer-item__field-value">TP. Hồ Chí Minh</Col>
+            <Col className="offer-item__field-value">{offer.freelancer_detail.user_information.address}</Col>
           </Row>
           <Row>
             <Col xs={5} className="offer-item__field">
-              Ngày gia nhập
-            </Col>
-            <Col className="offer-item__field-value">05/05/2021</Col>
-          </Row>
-          <Row>
-            <Col xs={5} className="offer-item__field">
-              Việc đã làm
+            Giá đề xuất
             </Col>
             <Col className="offer-item__field-value">
-              <Link>1 việc</Link>
+              {offer.balance}
             </Col>
           </Row>
           <Row>
             <Col xs={5} className="offer-item__field">
-              Thu nhập
+            Ước tính
             </Col>
             <Col className="offer-item__field-value">
-              <Link>50.000.000 VNĐ</Link>
+            {offer.expect_day} ngày
             </Col>
+          </Row>
+          <Row>
+            <Col xs={5} className="offer-item__field">
+            Ngày
+            </Col>
+            <Col className="offer-item__field-value">{toString(offer.created_at)}</Col>
           </Row>
         </Col>
       </Row>

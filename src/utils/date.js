@@ -1,5 +1,5 @@
 const toString = (date) => {
-  return date;
+  return new Date(date).toISOString().slice(0, 10);
 }
 
 const timeToDay = (time) => {

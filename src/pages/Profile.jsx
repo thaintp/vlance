@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
 import JobService from "services/job";
+import UserService from "services/user";
 import { map_status } from "utils/status";
 
 const Profile = () => {
@@ -12,7 +13,7 @@ const Profile = () => {
     const auth = useSelector((state) => state.auth);
     useEffect(() => {
         if (id) {
-            
+            UserService.getByID(id).then(data => setAccount(data.data));
         } else {
             setAccount(auth.account);
         }
@@ -21,7 +22,7 @@ const Profile = () => {
         JobService.get({ employer_id: account.id }).then((data) => setEJobs(data.data));
         JobService.get({ freelancer_id: account.id }).then((data) => setFJobs(data.data));
     }, [account])
-    return (account ?
+    return ((id || auth.account) ?
         <html lang="en">
             <head>
                 <base href="../../../" />
@@ -565,7 +566,7 @@ const Profile = () => {
                     </path>
                 </svg>
             </body>
-        </html> : <></>
+        </html> : <Redirect to="/" />
     );
 };
 

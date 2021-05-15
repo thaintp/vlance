@@ -12,9 +12,11 @@ const JobDetail = () => {
   const [job, setJob] = useState({});
   const { isLoggedIn } = useSelector(state => state.auth);
   const [canOffer, setCanOffer] = useState(false);
+  const [offerList, setOfferList] = useState([]);
 
   useEffect(() => {
     JobService.getByID(parseInt(id)).then((data) => setJob(data.data));
+    OfferService.get({id}).then(data => setOfferList(data.data));
   }, [id]);
   useEffect(() => {
     if (isLoggedIn) {
@@ -27,7 +29,7 @@ const JobDetail = () => {
     <div className="job-detail not-fluid">
       <Detail className="job-detail__detail" job={job} />
       { canOffer && <OfferForm job={job} setCanOffer={setCanOffer}></OfferForm>}
-      <OfferList />
+      <OfferList offerList={offerList} />
     </div>
   );
 };
