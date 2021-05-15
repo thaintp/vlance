@@ -5,29 +5,42 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
-const OfferItem = ({ offer, isAuthor }) => {
-  console.log("[OfferItem] : ", offer);
-  //const user_id = useSelector((state) => state.auth.user);
+import {toString} from 'utils/date'
+import OfferService from 'services/offer';
+import {useSelector} from 'react-redux';
+import Toast from 'utils/toast';
+
+const OfferItem = ({ offer, job }) => {
   const freelancer = offer.freelancer_detail;
-  const fakeSkills =
-    freelancer.user_information &&
-    freelancer.user_information.skill &&
-    (freelancer.user_information.skill != null
-      ? freelancer.user_information.skill.split("|")
-      : []);
-  console.log("is author", isAuthor);
+  const { account } = useSelector(state => state.auth);
+  const selectOffer = () => {
+    OfferService.selectOffer(job.id, offer.freelancer_id).then(res => {
+      if (res.status) {
+        Toast.fire({
+          icon: "success",
+          title: "Chọn ứng viên thành công",
+        })
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Chọn ứng viên thất bại",
+        })
+      }
+    });
+  }
   return (
-    <>
-      <div className="offer-item">
-        <Row>
-          <Col lg={2} className="offer-item__sec--center">
-            <Row>
-              <Col xs="12">
+    <div className="offer-item">
+      <Row>
+        <Col lg={2} className="offer-item__sec--center">
+          <Row>
+            <Col xs="12">
+              <Link to={`/users/${offer.freelancer_id}`}>
                 <img
                   className="offer-item__avatar"
                   src="https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"
                   alt="avatar"
                 />
+                </Link>
               </Col>
               <Col>
                 <Rating
@@ -52,88 +65,83 @@ const OfferItem = ({ offer, isAuthor }) => {
             </Row>
           </Col>
 
-          <Col>
-            <Row>
-              <Col>
-                <Link to="/user/{freelancer.id}">
-                  <div className="offer-item__full-name">
-                    {freelancer.user_information &&
+        <Col>
+          <Row>
+            <Col>
+              <Link to={`/users/${offer.freelancer_id}`}>
+                <div className="offer-item__full-name">{freelancer.user_information &&
                       (freelancer.user_information.fullname != null
                         ? freelancer.user_information.fullname
-                        : freelancer.name)}
-                  </div>
-                </Link>
-              </Col>
+                        : freelancer.name)}</div>
+              </Link>
+            </Col>
               <Col xs="auto">
-                {isAuthor && isAuthor === true ? (
-                  <Button className="btn-success" size="md">
+                {account && account.id === job.employer_id ? (
+                  <Button className="btn-success" size="md" onClick={() => selectOffer()}>
                     Chọn ứng viên
                   </Button>
                 ) : (
                   ""
                 )}
               </Col>
-            </Row>
-            <Row>
-              <Col>
-                <div className="offer-item__job-title">Software Engineer</div>
-              </Col>
-            </Row>
+          </Row>
+          <Row>
+            <Col>
+              <div className="offer-item__job-title">{offer.freelancer_detail.user_information.bio}</div>
+            </Col>
+          </Row>
 
-            <Row>
-              <Col>
-                <div>
-                  <span className="offer-item__field">
-                    Kỹ năng:&nbsp;&nbsp;
-                  </span>
-                  <span className="offer-item__field-value">
-                    {fakeSkills &&
-                      fakeSkills.map((skill, idx) => (
-                        <Badge key={idx} pill variant="secondary">
-                          {skill}
-                        </Badge>
-                      ))}
-                  </span>
-                </div>
-              </Col>
-            </Row>
-          </Col>
+          <Row>
+            <Col>
+              <div>
+                <span className="offer-item__field">Kỹ năng:&nbsp;&nbsp;</span>
+                <span className="offer-item__field-value">
+                  {offer.freelancer_detail.user_information.skill.split("|").map((skill, index) => (
+                    <Link to="#/" key={index}>
+                      <Badge pill variant="secondary">
+                        {skill}
+                      </Badge>
+                      <span> </span>
+                    </Link>
+                  ))}
+                </span>
+              </div>
+            </Col>
+          </Row>
+        </Col>
 
-          <Col lg={3}>
-            <Row>
-              <Col xs={5} className="offer-item__field">
-                Đến từ
-              </Col>
-              <Col className="offer-item__field-value">TP. Hồ Chí Minh</Col>
-            </Row>
-            <Row>
-              <Col xs={5} className="offer-item__field">
-                Ngày gia nhập
-              </Col>
-              <Col className="offer-item__field-value">
-                {freelancer.created_at ?? "14/05/2021"}
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={5} className="offer-item__field">
-                Việc đã làm
-              </Col>
-              <Col className="offer-item__field-value">
-                <Link to="#">1 việc</Link>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={5} className="offer-item__field">
-                Thu nhập
-              </Col>
-              <Col className="offer-item__field-value">
-                <Link to="#">50.000.000 VNĐ</Link>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </div>
-    </>
+        <Col lg={3}>
+          <Row>
+            <Col xs={5} className="offer-item__field">
+              Đến từ
+            </Col>
+            <Col className="offer-item__field-value">{offer.freelancer_detail.user_information.address}</Col>
+          </Row>
+          <Row>
+            <Col xs={5} className="offer-item__field">
+            Giá đề xuất
+            </Col>
+            <Col className="offer-item__field-value">
+              {offer.balance}
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={5} className="offer-item__field">
+            Ước tính
+            </Col>
+            <Col className="offer-item__field-value">
+            {offer.expect_day} ngày
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={5} className="offer-item__field">
+            Ngày
+            </Col>
+            <Col className="offer-item__field-value">{toString(offer.created_at)}</Col>
+          </Row>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

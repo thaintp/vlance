@@ -4,6 +4,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import {toString} from 'utils/date';
+import { toVND } from 'utils/number'
+import jobType from 'utils/jobType';
 
 const ProjectInfo = ({ job }) => {
   return (
@@ -20,7 +23,7 @@ const ProjectInfo = ({ job }) => {
           <Col xs={5} className="project-info__field mb-2">
             Ngày đăng
           </Col>
-          <Col xs={7}>{job.created_at}</Col>
+          <Col xs={7}>{job.created_at ? toString(job.created_at) : ""}</Col>
         </Row>
         <Row>
           <Col xs={5} className="project-info__field mb-2">
@@ -38,19 +41,19 @@ const ProjectInfo = ({ job }) => {
           <Col xs={5} className="project-info__field mb-2">
             Ngân sách
           </Col>
-          <Col xs={7}>{job.expect_balance}</Col>
+          <Col xs={7}>{toVND(job.expect_balance)}</Col>
         </Row>
         <Row>
           <Col xs={5} className="project-info__field mb-2">
             Hình thức làm việc
           </Col>
-          <Col xs={7}>{job.job_type}</Col>
+          <Col xs={7}>{jobType[parseInt(job.job_type)]}</Col>
         </Row>
         <Row>
           <Col xs={5} className="project-info__field mb-2">
             Hình thức trả lương
           </Col>
-          <Col xs={7}>{job.job_type}</Col>
+          <Col xs={7}>{jobType[parseInt(job.job_type)]}</Col>
         </Row>
       </Container>
       <Container className="project-info__employer">
@@ -69,7 +72,7 @@ const ProjectInfo = ({ job }) => {
               className="project-info__employer__name"
               to={`/users/${job.employer_detail?.id}`}
             >
-              {job.employer_detail?.name}
+              {job.employer_detail?.user_information?.fullname}
             </Link>
             <div className="project-info__jobTitle">{job.employer_detail?.job}</div>
           </Col>
@@ -86,16 +89,16 @@ const ProjectInfo = ({ job }) => {
           </Col>
           <Col xs={9}>{job.employer_detail?.email}</Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col xs={3} className="project-info__field mb-2">
             Đã đăng
           </Col>
           <Col xs={9}>
             <Link to={`/users/${job.employer_detail?.id}/posts`}>
-              {job.employer_detail?.posted} việc
+              {job.employer_detail?.posted ?? 0} việc
             </Link>
           </Col>
-        </Row>
+        </Row> */}
         <Button className="w-100 my-4 btn-success">Liên hệ trực tiếp</Button>
       </Container>
     </div>
