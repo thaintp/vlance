@@ -28,15 +28,7 @@ const OfferItem = ({ offer, job }) => {
       }
     });
   };
-  const renderButtonAppliantState = () => {
-    if (account && account.id === job.employer_id && job.status === 0) {
-      return (
-        <Button className="btn-success" size="md" onClick={() => selectOffer()}>
-          Chọn ứng viên
-        </Button>
-      );
-    }
-  };
+
   return (
     <div className="offer-item">
       <Row>
@@ -101,7 +93,7 @@ const OfferItem = ({ offer, job }) => {
 
               {job.freelancer_id && job.freelancer_id === freelancer.id ? (
                 <Button className="btn-info" size="md">
-                  Đã được chọn
+                  Được chọn
                 </Button>
               ) : (
                 ""
