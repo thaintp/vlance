@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <nav className="nav-bar">
-      <Dropdown>
+      <Link to="/postjob" className="my-auto nav-bar__link">
+      Đăng tin tuyển dụng
+      </Link>
+      {/* <Dropdown>
         <Dropdown.Toggle variant="" id="dropdown-basic">
-          Đăng tin tuyển dụng
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
@@ -24,7 +26,7 @@ const NavBar = () => {
             Đăng cuộc thi thiết kế
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown> */}
       <Dropdown>
         <Dropdown.Toggle variant="" id="dropdown-basic">
           Tìm việc làm
@@ -34,28 +36,30 @@ const NavBar = () => {
           <Dropdown.Item as={Link} to="/jobs">
             Tất cả công việc
           </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
+          <Dropdown.Item as={Link} to="/jobs">
             Việc bán thời gian
           </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
+          <Dropdown.Item as={Link} to="/jobs">
             Việc toàn thời gian
           </Dropdown.Item>
-          <Dropdown.Item as={Link} to="#">
+          <Dropdown.Item as={Link} to="/jobs">
             Cuộc thi thiết kế
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <Dropdown>
+      {/* <Dropdown>
         <Dropdown.Toggle variant="" id="dropdown-basic">
           Tìm Freelancer
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to="#">
-            Tất cả Freelancer
           </Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown> */}
+      <Link to="/users" className="my-auto nav-bar__link">
+          Tất cả Freelancer
+      </Link>
     </nav>
   );
 };

@@ -21,6 +21,9 @@ const Account = ({ account, size }) => {
         <Link className="account__action" to="/profile">
         Thông tin tài khoản
         </Link>
+        <Link className="account__action" to="/edit-profile">
+        Chỉnh sửa thông tin
+        </Link>
         <Link className="account__action" to="/job-manager/employer">
           Công việc đã đăng
         </Link>

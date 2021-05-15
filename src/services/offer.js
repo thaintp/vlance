@@ -42,6 +42,20 @@ class OfferService {
       .then((res) => res.data.data)
       .catch((err) => console.error(err));
   }
+  async get(filter = {}) {
+    return await axios({
+      method: "GET",
+      url: '/offer',
+      params: filter
+    }).then(res => res.data).catch(err => console.error(err));
+  }
+  async selectOffer(job_id, freelancer_id) {
+    return await axios({
+      method: "GET",
+      url: "/choose_applicant",
+      params: {job_id, freelancer_id}
+    }).then(res => res.data).catch(err => console.error(err));
+  }
 }
 
 export default new OfferService();

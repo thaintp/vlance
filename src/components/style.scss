@@ -67,6 +67,9 @@
   color: $greyish-brown;
   background: none;
   border: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .auth-buttons__loginBtn {
@@ -80,6 +83,12 @@
   align-items: center;
   justify-content: center;
   background-color: $white;
+  &:hover {
+    background-color: $orange-1;
+    .auth-buttons__loginBtn__text {
+      color: $white;
+    }
+  }
 }
 .auth-buttons__loginBtn__text {
   width: 100%;
@@ -293,6 +302,9 @@ a.button {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+.nav-bar__link {
+  color: #000 !important;
 }
 
 .link-text {

@@ -36,13 +36,13 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
-        account: null,
+        account: undefined,
       };
     case LOGOUT:
       return {
         ...state,
         isLoggedIn: false,
-        account: null,
+        account: undefined,
       };
     default:
       return state;
