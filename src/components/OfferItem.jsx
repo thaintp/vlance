@@ -6,9 +6,28 @@ import Badge from "react-bootstrap/Badge";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
 import {toString} from 'utils/date'
+import OfferService from 'services/offer';
+import {useSelector} from 'react-redux';
+import Toast from 'utils/toast';
 
-const OfferItem = ({ offer, isAuthor }) => {
-const freelancer = offer.freelancer_detail;
+const OfferItem = ({ offer, job }) => {
+  const freelancer = offer.freelancer_detail;
+  const { account } = useSelector(state => state.auth);
+  const selectOffer = () => {
+    OfferService.selectOffer(job.id, offer.freelancer_id).then(res => {
+      if (res.status) {
+        Toast.fire({
+          icon: "success",
+          title: "Chọn ứng viên thành công",
+        })
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Chọn ứng viên thất bại",
+        })
+      }
+    });
+  }
   return (
     <div className="offer-item">
       <Row>
@@ -56,9 +75,9 @@ const freelancer = offer.freelancer_detail;
                         : freelancer.name)}</div>
               </Link>
             </Col>
-                          <Col xs="auto">
-                {isAuthor && isAuthor === true ? (
-                  <Button className="btn-success" size="md">
+              <Col xs="auto">
+                {account && account.id === job.employer_id ? (
+                  <Button className="btn-success" size="md" onClick={() => selectOffer()}>
                     Chọn ứng viên
                   </Button>
                 ) : (

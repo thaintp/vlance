@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import { OfferItem } from "components";
 import { getMinMidMax, toVND } from 'utils/number'
 
-const OfferList = ({ offerList, isAuthor }) => {
+const OfferList = ({ offerList, job }) => {
   const [min, mid, max] = getMinMidMax(offerList.map(offer => offer.balance));
   const midDay = offerList.length ? offerList.map(offer => offer.expect_day).reduce((x, y)=>x+y) / offerList.length : 0;
   return (
@@ -40,7 +40,7 @@ const OfferList = ({ offerList, isAuthor }) => {
       </div>
 
       {offerList.map((offer) => (
-        <OfferItem offer={offer} key={offer.id} isAuthor={isAuthor} />
+        <OfferItem offer={offer} key={offer.id} job={job} />
       ))}
     </div>
   );

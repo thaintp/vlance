@@ -10,7 +10,6 @@ const JobDetail = ({ match }) => {
   const { id } = match.params;
   const [job, setJob] = useState({});
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { account } = useSelector((state) => state.auth);
   const [canOffer, setCanOffer] = useState(false);
   const [offerList, setOfferList] = useState([]);
 
@@ -35,7 +34,7 @@ const JobDetail = ({ match }) => {
     <div className="job-detail not-fluid">
       <Detail className="job-detail__detail" job={job} />
       { canOffer && <OfferForm job={job} setCanOffer={setCanOffer}></OfferForm>}
-      <OfferList offerList={offerList} isAuthor={account && job.employer_id === account.id} />
+      <OfferList offerList={offerList} job={job} />
     </div>
   );
 };

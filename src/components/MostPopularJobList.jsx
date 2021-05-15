@@ -7,8 +7,12 @@ import JobService from "services/job";
 
 const MostPopularJobList = () => {
   const [jobs, setJobs] = useState([]);
+  const [totalJobs, setTotalJobs] = useState(0);
   useEffect(() => {
-    JobService.getAll().then((data) => setJobs(data));
+    JobService.get().then((data) => {
+      setJobs(data?.data.slice(-3))
+      setTotalJobs(data?.data.length);
+    });
   }, []);
 
   return (
@@ -24,7 +28,7 @@ const MostPopularJobList = () => {
       <div className="most-popular-job-list__all-jobs-btn">
         <Link to="/jobs">
           <Button>
-            Xem tất cả <strong>{50010}</strong> công việc
+            Xem tất cả <strong>{totalJobs}</strong> công việc
           </Button>
         </Link>
       </div>
