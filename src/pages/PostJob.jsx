@@ -4,7 +4,7 @@ import "./postjob.scss";
 
 const PostJob = () => {
   return (
-    <form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_projects_add_form">
+    <form class="form fv-plugins-bootstrap fv-plugins-framework postjob" id="kt_projects_add_form">
       <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
         <h4 class="mb-10 pb-3 font-weight-bold text-dark">Việc cần tuyển freelancer</h4>
         <div class="row">
