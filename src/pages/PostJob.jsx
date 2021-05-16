@@ -9,33 +9,15 @@ const PostJob = () => {
 
   return (
     isLoggedIn ?
-    <form
-      className="form fv-plugins-bootstrap fv-plugins-framework"
-      id="kt_projects_add_form"
-    >
-      <div
-        className="pb-5"
-        data-wizard-type="step-content"
-        data-wizard-state="current"
-      >
-        <h4 className="mb-10 pb-3 font-weight-bold text-dark">
-          Việc cần tuyển freelancer
-        </h4>
-        <div className="row">
-          <div className="col-xl-12">
-            <div className="form-group row fv-plugins-icon-container">
-              <label className="col-xl-3 col-lg-3 col-form-label">
-                Chọn lĩnh vực cần tuyển
-              </label>
-              <div className="col-lg-4 col-md-9 col-sm-12" data-select2-id="4">
-                <select
-                  className="form-control select2 select2-hidden-accessible"
-                  id="kt_select2"
-                  name="Jobcategory"
-                  data-select2-id="kt_select2"
-                  tabindex="-1"
-                  aria-hidden="true"
-                >
+    <form class="form fv-plugins-bootstrap fv-plugins-framework postjob" id="kt_projects_add_form">
+      <div class="pb-5 mx-auto" data-wizard-type="step-content" data-wizard-state="current">
+        <h4 class="mb-10 pb-3 font-weight-bold text-dark">Việc cần tuyển freelancer</h4>
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="form-group row fv-plugins-icon-container">
+              <label class="col-xl-3 col-lg-3 col-form-label">Chọn lĩnh vực cần tuyển</label>
+              <div class="col-lg-4 col-md-9 col-sm-12" data-select2-id="4">
+                <select class="form-control select2 select2-hidden-accessible" id="kt_select2" name="Jobcategory" data-select2-id="kt_select2" tabindex="-1" aria-hidden="true">
                   <option label="- Tên lĩnh vực -" data-select2-id="2"></option>
                   <optgroup
                     label="Alaskan/Hawaiian Time Zone"
@@ -398,7 +380,7 @@ const PostJob = () => {
         </div>
       </div>
     </form>
-    : <Redirect to="/"/>
+    : <Redirect to="/" />
   );
 };
 

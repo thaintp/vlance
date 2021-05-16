@@ -1,16 +1,7 @@
 import "App.scss";
 
 import { Router, Switch, Route, Redirect } from "react-router-dom";
-import {
-  Home,
-  Jobs,
-  JobDetail,
-  JobManager,
-  PostJob,
-  Profile,
-  EditProfile,
-  ChangePassword,
-} from "pages";
+import { Home, Jobs, JobDetail, JobManager, PostJob, Profile, EditProfile, ChangePassword, Job2 } from "pages";
 import { TopBar, NavBar } from "components";
 import { history } from "./helpers/history";
 
@@ -51,6 +42,9 @@ function App() {
           </Route>
           <Route path="/change-password">
             <ChangePassword></ChangePassword>
+          </Route>
+          <Route path="/job2">
+            <Job2></Job2>
           </Route>
           <Route path="/">
             <Redirect to="/" />
