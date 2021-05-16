@@ -1,7 +1,6 @@
 import "./style.scss";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
 import { Link } from "react-router-dom";
 import { ImAttachment } from "react-icons/im";
 import { ReviewButton } from "components";
@@ -10,6 +9,14 @@ import JobService from "services/job";
 import { toVND } from "utils/number";
 import { useSelector } from "react-redux";
 import Toast from "utils/toast";
+import {
+  Button as ReactButton,
+  Tabs,
+  Tab,
+  Container,
+  Row,
+  Col,
+} from "react-bootstrap";
 
 const Conversation = ({ job_id }) => {
   //id job_id
@@ -18,6 +25,7 @@ const Conversation = ({ job_id }) => {
   const [conversations, setConversations] = useState([]);
   const [message, setMessage] = useState("");
   const [toUser, setToUser] = useState(0);
+  const [key, setKey] = useState("chat");
   useEffect(() => {
     JobService.getByID(parseInt(job_id)).then((data) => {
       setJob(data.data);
@@ -70,34 +78,49 @@ const Conversation = ({ job_id }) => {
         </Col>
 
         <Col>
-          {/* {//send message} */}
-          <form action="#" className="conversation__chat-box">
-            <textarea
-              name="message"
-              rows="4"
-              cols="1000"
-              value={message}
-              onChange={onChangeMessage}
-              className="form-textarea"
-              placeholder="Gửi tin nhắn ở đây"
-            ></textarea>
-            <Row>
-              <Col>
-                <Link>
-                  <ImAttachment />
-                </Link>
-              </Col>
-              <Col xs="auto">
-                <Button variant="success" onClick={handleSendMessage}>
-                  Gửi
-                </Button>
-              </Col>
-            </Row>
-          </form>
+          <Tabs
+            id="controlled-tab-example"
+            activeKey={key}
+            onSelect={(k) => setKey(k)}
+          >
+            <Tab eventKey="chat" title="Chat">
+              {/* {//send message} */}
+              <form action="#" className="conversation__chat-box">
+                <textarea
+                  name="message"
+                  rows="4"
+                  cols="1000"
+                  value={message}
+                  onChange={onChangeMessage}
+                  className="form-textarea"
+                  placeholder="Gửi tin nhắn ở đây"
+                ></textarea>
+                <Row>
+                  <Col>
+                    <Link>
+                      <ImAttachment />
+                    </Link>
+                  </Col>
+                  <Col xs="auto">
+                    <Button variant="success" onClick={handleSendMessage}>
+                      Gửi
+                    </Button>
+                  </Col>
+                </Row>
+              </form>
 
-          {/* {//end send message} */}
+              {/* {//end send message} */}
 
-          <ChatHistory conversations={conversations} />
+              <ChatHistory conversations={conversations} />
+            </Tab>
+
+            <Tab eventKey="job_action" title="Quản lý job">
+              <Container>
+                <Row>ABC</Row>
+                <Row>ABC</Row>
+              </Container>
+            </Tab>
+          </Tabs>
         </Col>
       </Row>
     </div>
@@ -111,6 +134,14 @@ const JobInfo = ({ job }) => {
       <Row>
         <Col className="conversation__job-info__field-label">ID dự án</Col>
         <Col className="conversation__job-info__field-value">{job?.id}</Col>
+      </Row>
+      <Row>
+        <Col className="conversation__job-info__field-label">
+          Người trúng thầu
+        </Col>
+        <Col className="conversation__job-info__field-value">
+          <b>{job?.freelancer_detail?.user_information?.fullname}</b>
+        </Col>
       </Row>
       <Row>
         <Col className="conversation__job-info__field-label">Địa điểm</Col>
@@ -132,6 +163,7 @@ const JobInfo = ({ job }) => {
           {toVND(job?.freelancer_applicant?.balance)}
         </Col>
       </Row>
+
       <Row>
         <Col className="conversation__job-info__field-label">
           Số ngày dự kiến
