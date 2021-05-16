@@ -75,7 +75,15 @@ class JobService {
       .then((response) => response.data)
       .catch((error) => console.error(error));
   }
-
+  async getJobConversation(params = {}) {
+    return await axios({
+      method: "GET",
+      url: `/get_conversation`,
+      params: params,
+    })
+      .then((response) => response.data)
+      .catch((error) => console.error(error));
+  }
   async getByState(state) {
     return fake.filter((x) => x.state === state);
   }

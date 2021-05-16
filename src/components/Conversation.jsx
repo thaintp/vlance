@@ -5,32 +5,46 @@ import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import { ImAttachment } from "react-icons/im";
 import { ReviewButton } from "components";
+import { useState, useEffect } from "react";
+import JobService from "services/job";
+import { toVND } from "utils/number";
+import { useSelector } from "react-redux";
+const Conversation = ({ job_id }) => {
+  //id job_id
+  const { account } = useSelector((state) => state.auth);
+  const [job, setJob] = useState({});
+  const [conversations, setConversations] = useState([]);
+  useEffect(() => {
+    JobService.getByID(parseInt(job_id)).then((data) => setJob(data.data));
+    JobService.getJobConversation({ job_id: job_id }).then((data) =>
+      setConversations(data.data)
+    );
+  }, [job_id]);
 
-const Conversation = () => {
   return (
     <div className="conversation">
       <Row>
         <Col md={12} lg={3}>
-          <JobInfo />
+          <JobInfo job={job} />
           <ReviewBox />
         </Col>
 
         <Col>
           <ChatBox />
-          <ChatHistory />
+          <ChatHistory conversations={conversations} />
         </Col>
       </Row>
     </div>
   );
 };
 
-const JobInfo = () => {
+const JobInfo = ({ job }) => {
   return (
     <div className="conversation__job-info">
       <div className="conversation__job-info__title">Thông tin việc làm</div>
       <Row>
         <Col className="conversation__job-info__field-label">ID dự án</Col>
-        <Col className="conversation__job-info__field-value">37668</Col>
+        <Col className="conversation__job-info__field-value">{job?.id}</Col>
       </Row>
       <Row>
         <Col className="conversation__job-info__field-label">Địa điểm</Col>
@@ -40,17 +54,25 @@ const JobInfo = () => {
         <Col className="conversation__job-info__field-label">
           Ngân sách dự kiến
         </Col>
-        <Col className="conversation__job-info__field-value">8.000.000 VNĐ</Col>
+        <Col className="conversation__job-info__field-value">
+          {toVND(job?.expect_balance)}
+        </Col>
       </Row>
       <Row>
         <Col className="conversation__job-info__field-label">
           Ngân sách trúng thầu
         </Col>
-        <Col className="conversation__job-info__field-value">8.000.000 VNĐ</Col>
+        <Col className="conversation__job-info__field-value">
+          {toVND(job?.freelancer_applicant?.balance)}
+        </Col>
       </Row>
       <Row>
-        <Col className="conversation__job-info__field-label">Đã đặt cọc</Col>
-        <Col className="conversation__job-info__field-value">0 VNĐ</Col>
+        <Col className="conversation__job-info__field-label">
+          Số ngày dự kiến
+        </Col>
+        <Col className="conversation__job-info__field-value">
+          {job?.freelancer_applicant?.expect_day} ngày
+        </Col>
       </Row>
     </div>
   );
@@ -97,9 +119,7 @@ const ChatBox = () => {
   );
 };
 
-const ChatHistory = () => {
-  const fake = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+const ChatHistory = ({ conversations }) => {
   return (
     <div>
       <Row>
@@ -114,14 +134,14 @@ const ChatHistory = () => {
 
       <hr />
 
-      {fake.map(() => (
-        <MessageItem />
+      {conversations?.map((item, idx) => (
+        <MessageItem key={idx} conv={item} />
       ))}
     </div>
   );
 };
 
-const MessageItem = () => {
+const MessageItem = ({ conv }) => {
   return (
     <div>
       <Row className="conversation__message-item">
@@ -137,14 +157,11 @@ const MessageItem = () => {
         <Col>
           <Link>
             <div className="conversation__message-item__from-user">
-              Đỗ Hồng Nam
+              {conv?.from_user_detail?.user_information?.fullname}
             </div>
           </Link>
           <div className="conversation__message-item__message">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            {conv?.message}
           </div>
         </Col>
         <Col xs="auto" className="conversation__message-item__created-at">
