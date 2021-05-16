@@ -36,7 +36,7 @@ function App() {
           <Route exact path="/jobs">
             <Jobs></Jobs>
           </Route>
-          <Route path="/conversation" component={JobConversation} />
+          <Route path="/conversation/:id" component={JobConversation} />
 
           <Route path="/job-manager/:role">
             <JobManager></JobManager>
