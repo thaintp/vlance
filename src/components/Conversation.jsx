@@ -9,18 +9,58 @@ import { useState, useEffect } from "react";
 import JobService from "services/job";
 import { toVND } from "utils/number";
 import { useSelector } from "react-redux";
+import Toast from "utils/toast";
+
 const Conversation = ({ job_id }) => {
   //id job_id
   const { account } = useSelector((state) => state.auth);
   const [job, setJob] = useState({});
   const [conversations, setConversations] = useState([]);
+  const [message, setMessage] = useState("");
+  const [toUser, setToUser] = useState(0);
   useEffect(() => {
-    JobService.getByID(parseInt(job_id)).then((data) => setJob(data.data));
-    JobService.getJobConversation({ job_id: job_id }).then((data) =>
-      setConversations(data.data)
-    );
+    JobService.getByID(parseInt(job_id)).then((data) => {
+      setJob(data.data);
+      if (job.id === undefined) {
+        return;
+      }
+      if (job && job.freelancer_id === account.id) {
+        setToUser(job.employer_id);
+      }
+      if (job && job.employer_id === account.id) {
+        setToUser(job.freelancer_id);
+      }
+    });
+
+    JobService.getJobConversation({
+      job_id: job_id,
+      order_by: "desc",
+    }).then((data) => setConversations(data.data));
   }, [job_id]);
 
+  const onChangeMessage = (e) => {
+    setMessage(e.target.value);
+  };
+  const handleSendMessage = () => {
+    JobService.sendJobMessage({
+      job_id: parseInt(job_id),
+      to_user: toUser,
+      message: message,
+    }).then((res) => {
+      if (res.status) {
+        Toast.fire({
+          icon: "success",
+          title: "Gửi tin thành công",
+        });
+        window.location.reload(false);
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Gửi tin nhắn thất bại",
+        });
+      }
+    });
+  };
   return (
     <div className="conversation">
       <Row>
@@ -30,7 +70,33 @@ const Conversation = ({ job_id }) => {
         </Col>
 
         <Col>
-          <ChatBox />
+          {/* {//send message} */}
+          <form action="#" className="conversation__chat-box">
+            <textarea
+              name="message"
+              rows="4"
+              cols="1000"
+              value={message}
+              onChange={onChangeMessage}
+              className="form-textarea"
+              placeholder="Gửi tin nhắn ở đây"
+            ></textarea>
+            <Row>
+              <Col>
+                <Link>
+                  <ImAttachment />
+                </Link>
+              </Col>
+              <Col xs="auto">
+                <Button variant="success" onClick={handleSendMessage}>
+                  Gửi
+                </Button>
+              </Col>
+            </Row>
+          </form>
+
+          {/* {//end send message} */}
+
           <ChatHistory conversations={conversations} />
         </Col>
       </Row>
