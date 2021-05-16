@@ -20,7 +20,6 @@ const OfferItem = ({ offer, job }) => {
           icon: "success",
           title: "Chọn ứng viên thành công",
         });
-        window.location.reload();
       } else {
         Toast.fire({
           icon: "error",
