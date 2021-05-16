@@ -69,7 +69,7 @@ const Profile = () => {
                                                             <i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
                                                         </span>
                                                         <div class="d-flex flex-column text-dark-75">
-                                                            <span class="font-weight-bolder font-size-sm">Earnings</span>
+                                                            <span class="font-weight-bolder font-size-sm">Balance</span>
                                                             <span class="font-weight-bolder font-size-h5">
                                                                 <span class="text-dark-50 font-weight-bold">$</span>249,500</span>
                                                         </div>
@@ -90,54 +90,9 @@ const Profile = () => {
                                                             <i class="flaticon-pie-chart display-4 text-muted font-weight-bold"></i>
                                                         </span>
                                                         <div class="d-flex flex-column text-dark-75">
-                                                            <span class="font-weight-bolder font-size-sm">Net</span>
+                                                            <span class="font-weight-bolder font-size-sm">Skill</span>
                                                             <span class="font-weight-bolder font-size-h5">
                                                                 <span class="text-dark-50 font-weight-bold">$</span>782,300</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                                                        <span class="mr-4">
-                                                            <i class="flaticon-file-2 display-4 text-muted font-weight-bold"></i>
-                                                        </span>
-                                                        <div class="d-flex flex-column flex-lg-fill">
-                                                            <span class="text-dark-75 font-weight-bolder font-size-sm">73
-                                                        Tasks</span>
-                                                            <a href="/#" class="text-primary font-weight-bolder">View</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                                                        <span class="mr-4">
-                                                            <i class="flaticon-chat-1 display-4 text-muted font-weight-bold"></i>
-                                                        </span>
-                                                        <div class="d-flex flex-column">
-                                                            <span class="text-dark-75 font-weight-bolder font-size-sm">648
-                                                        Comments</span>
-                                                            <a href="/#" class="text-primary font-weight-bolder">View</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex align-items-center flex-lg-fill mb-2 float-left">
-                                                        <span class="mr-4">
-                                                            <i class="flaticon-network display-4 text-muted font-weight-bold"></i>
-                                                        </span>
-                                                        <div class="symbol-group symbol-hover">
-                                                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Mark Stone">
-                                                                <img alt="Pic" src="/images/assets/media/users/300_25.jpg" />
-                                                            </div>
-                                                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Charlie Stone">
-                                                                <img alt="Pic" src="/images/assets/media/users/300_19.jpg" />
-                                                            </div>
-                                                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Luca Doncic">
-                                                                <img alt="Pic" src="/images/assets/media/users/300_22.jpg" />
-                                                            </div>
-                                                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Nick Mana">
-                                                                <img alt="Pic" src="/images/assets/media/users/300_23.jpg" />
-                                                            </div>
-                                                            <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Teresa Fox">
-                                                                <img alt="Pic" src="/images/assets/media/users/300_18.jpg" />
-                                                            </div>
-                                                            <div class="symbol symbol-30 symbol-circle symbol-light">
-                                                                <span class="symbol-label font-weight-bold">5+</span>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -355,15 +310,7 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-                {/*
-        <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
-        <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "/#ffffff", "primary": "/#1BC5BD", "secondary": "/#E5EAEE", "success": "/#1BC5BD", "info": "/#6993FF", "warning": "/#FFA800", "danger": "/#F64E60", "light": "/#F3F6F9", "dark": "/#212121" }, "light": { "white": "/#ffffff", "primary": "/#1BC5BD", "secondary": "/#ECF0F3", "success": "/#C9F7F5", "info": "/#E1E9FF", "warning": "/#FFF4DE", "danger": "/#FFE2E5", "light": "/#F3F6F9", "dark": "/#D6D6E0" }, "inverse": { "white": "/#ffffff", "primary": "/#ffffff", "secondary": "/#212121", "success": "/#ffffff", "info": "/#ffffff", "warning": "/#ffffff", "danger": "/#ffffff", "light": "/#464E5F", "dark": "/#ffffff" } }, "gray": { "gray-100": "/#F3F6F9", "gray-200": "/#ECF0F3", "gray-300": "/#E5EAEE", "gray-400": "/#D6D6E0", "gray-500": "/#B5B5C3", "gray-600": "/#80808F", "gray-700": "/#464E5F", "gray-800": "/#1B283F", "gray-900": "/#212121" } }, "font-family": "Poppins" };</script>
-        <script src="/images/assets/plugins/global/plugins.bundle.js"></script>
-        <script src="/images/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-        <script src="/images/assets/js/scripts.bundle.js"></script>
-        <script src="/images/assets/js/pages/widgets.js"></script>*/}
-                
+                </div> 
             </body>
         </html>
     );
