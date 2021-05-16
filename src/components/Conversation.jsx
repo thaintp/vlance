@@ -1,36 +1,147 @@
 import "./style.scss";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
 import { Link } from "react-router-dom";
 import { ImAttachment } from "react-icons/im";
 import { ReviewButton } from "components";
+import { useState, useEffect } from "react";
+import JobService from "services/job";
+import { toVND } from "utils/number";
+import { useSelector } from "react-redux";
+import Toast from "utils/toast";
+import {
+  Button as ReactButton,
+  Tabs,
+  Tab,
+  Container,
+  Row,
+  Col,
+} from "react-bootstrap";
 
-const Conversation = () => {
+const Conversation = ({ job_id }) => {
+  //id job_id
+  const { account } = useSelector((state) => state.auth);
+  const [job, setJob] = useState({});
+  const [conversations, setConversations] = useState([]);
+  const [message, setMessage] = useState("");
+  const [toUser, setToUser] = useState(0);
+  const [key, setKey] = useState("chat");
+  useEffect(() => {
+    JobService.getByID(parseInt(job_id)).then((data) => {
+      setJob(data.data);
+      if (job.id === undefined) {
+        return;
+      }
+      if (job && job.freelancer_id === account.id) {
+        setToUser(job.employer_id);
+      }
+      if (job && job.employer_id === account.id) {
+        setToUser(job.freelancer_id);
+      }
+    });
+
+    JobService.getJobConversation({
+      job_id: job_id,
+      order_by: "desc",
+    }).then((data) => setConversations(data.data));
+  }, [job_id]);
+
+  const onChangeMessage = (e) => {
+    setMessage(e.target.value);
+  };
+  const handleSendMessage = () => {
+    JobService.sendJobMessage({
+      job_id: parseInt(job_id),
+      to_user: toUser,
+      message: message,
+    }).then((res) => {
+      if (res.status) {
+        Toast.fire({
+          icon: "success",
+          title: "Gửi tin thành công",
+        });
+        window.location.reload(false);
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Gửi tin nhắn thất bại",
+        });
+      }
+    });
+  };
   return (
     <div className="conversation">
       <Row>
         <Col md={12} lg={3}>
-          <JobInfo />
+          <JobInfo job={job} />
           <ReviewBox />
         </Col>
 
         <Col>
-          <ChatBox />
-          <ChatHistory />
+          <Tabs
+            id="controlled-tab-example"
+            activeKey={key}
+            onSelect={(k) => setKey(k)}
+          >
+            <Tab eventKey="chat" title="Chat">
+              {/* {//send message} */}
+              <form action="#" className="conversation__chat-box">
+                <textarea
+                  name="message"
+                  rows="4"
+                  cols="1000"
+                  value={message}
+                  onChange={onChangeMessage}
+                  className="form-textarea"
+                  placeholder="Gửi tin nhắn ở đây"
+                ></textarea>
+                <Row>
+                  <Col>
+                    <Link>
+                      <ImAttachment />
+                    </Link>
+                  </Col>
+                  <Col xs="auto">
+                    <Button variant="success" onClick={handleSendMessage}>
+                      Gửi
+                    </Button>
+                  </Col>
+                </Row>
+              </form>
+
+              {/* {//end send message} */}
+
+              <ChatHistory conversations={conversations} />
+            </Tab>
+
+            <Tab eventKey="job_action" title="Quản lý job">
+              <Container>
+                <Row>ABC</Row>
+                <Row>ABC</Row>
+              </Container>
+            </Tab>
+          </Tabs>
         </Col>
       </Row>
     </div>
   );
 };
 
-const JobInfo = () => {
+const JobInfo = ({ job }) => {
   return (
     <div className="conversation__job-info">
       <div className="conversation__job-info__title">Thông tin việc làm</div>
       <Row>
         <Col className="conversation__job-info__field-label">ID dự án</Col>
-        <Col className="conversation__job-info__field-value">37668</Col>
+        <Col className="conversation__job-info__field-value">{job?.id}</Col>
+      </Row>
+      <Row>
+        <Col className="conversation__job-info__field-label">
+          Người trúng thầu
+        </Col>
+        <Col className="conversation__job-info__field-value">
+          <b>{job?.freelancer_detail?.user_information?.fullname}</b>
+        </Col>
       </Row>
       <Row>
         <Col className="conversation__job-info__field-label">Địa điểm</Col>
@@ -40,17 +151,26 @@ const JobInfo = () => {
         <Col className="conversation__job-info__field-label">
           Ngân sách dự kiến
         </Col>
-        <Col className="conversation__job-info__field-value">8.000.000 VNĐ</Col>
+        <Col className="conversation__job-info__field-value">
+          {toVND(job?.expect_balance)}
+        </Col>
       </Row>
       <Row>
         <Col className="conversation__job-info__field-label">
           Ngân sách trúng thầu
         </Col>
-        <Col className="conversation__job-info__field-value">8.000.000 VNĐ</Col>
+        <Col className="conversation__job-info__field-value">
+          {toVND(job?.freelancer_applicant?.balance)}
+        </Col>
       </Row>
+
       <Row>
-        <Col className="conversation__job-info__field-label">Đã đặt cọc</Col>
-        <Col className="conversation__job-info__field-value">0 VNĐ</Col>
+        <Col className="conversation__job-info__field-label">
+          Số ngày dự kiến
+        </Col>
+        <Col className="conversation__job-info__field-value">
+          {job?.freelancer_applicant?.expect_day} ngày
+        </Col>
       </Row>
     </div>
   );
@@ -97,9 +217,7 @@ const ChatBox = () => {
   );
 };
 
-const ChatHistory = () => {
-  const fake = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+const ChatHistory = ({ conversations }) => {
   return (
     <div>
       <Row>
@@ -114,14 +232,14 @@ const ChatHistory = () => {
 
       <hr />
 
-      {fake.map(() => (
-        <MessageItem />
+      {conversations?.map((item, idx) => (
+        <MessageItem key={idx} conv={item} />
       ))}
     </div>
   );
 };
 
-const MessageItem = () => {
+const MessageItem = ({ conv }) => {
   return (
     <div>
       <Row className="conversation__message-item">
@@ -137,14 +255,11 @@ const MessageItem = () => {
         <Col>
           <Link>
             <div className="conversation__message-item__from-user">
-              Đỗ Hồng Nam
+              {conv?.from_user_detail?.user_information?.fullname}
             </div>
           </Link>
           <div className="conversation__message-item__message">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            {conv?.message}
           </div>
         </Col>
         <Col xs="auto" className="conversation__message-item__created-at">

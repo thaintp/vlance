@@ -4,9 +4,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import {toString} from 'utils/date';
-import { toVND } from 'utils/number'
-import jobType from 'utils/jobType';
+import { toString } from "utils/date";
+import { toVND } from "utils/number";
+import jobType from "utils/jobType";
 
 const ProjectInfo = ({ job }) => {
   return (
@@ -64,7 +64,13 @@ const ProjectInfo = ({ job }) => {
               className="project-info__avatar"
               to={`/users/${job.employer_detail?.id}`}
             >
-              <img src={job.employer_detail?.avatar ?? "https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"} alt="avatar" />
+              <img
+                src={
+                  job.employer_detail?.avatar ??
+                  "https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"
+                }
+                alt="avatar"
+              />
             </Link>
           </Col>
           <Col xs={8} className="project-info__employer__info">
@@ -74,7 +80,9 @@ const ProjectInfo = ({ job }) => {
             >
               {job.employer_detail?.user_information?.fullname}
             </Link>
-            <div className="project-info__jobTitle">{job.employer_detail?.job}</div>
+            <div className="project-info__jobTitle">
+              {job.employer_detail?.job}
+            </div>
           </Col>
         </Row>
         <Row>
@@ -99,7 +107,9 @@ const ProjectInfo = ({ job }) => {
             </Link>
           </Col>
         </Row> */}
-        <Button className="w-100 my-4 btn-success">Liên hệ trực tiếp</Button>
+        <Link to={`/conversation/${job.id}`}>
+          <Button className="w-100 my-4 btn-success">Thảo luận dự án</Button>
+        </Link>
       </Container>
     </div>
   );
