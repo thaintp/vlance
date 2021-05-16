@@ -5,29 +5,30 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
-import {toString} from 'utils/date'
-import OfferService from 'services/offer';
-import {useSelector} from 'react-redux';
-import Toast from 'utils/toast';
-
+import { toString } from "utils/date";
+import OfferService from "services/offer";
+import { useSelector } from "react-redux";
+import Toast from "utils/toast";
+import { toVND } from "utils/number";
 const OfferItem = ({ offer, job }) => {
   const freelancer = offer.freelancer_detail;
-  const { account } = useSelector(state => state.auth);
+  const { account } = useSelector((state) => state.auth);
   const selectOffer = () => {
-    OfferService.selectOffer(job.id, offer.freelancer_id).then(res => {
+    OfferService.selectOffer(job.id, offer.freelancer_id).then((res) => {
       if (res.status) {
         Toast.fire({
           icon: "success",
           title: "Chọn ứng viên thành công",
-        })
+        });
       } else {
         Toast.fire({
           icon: "error",
-          title: "Chọn ứng viên thất bại",
-        })
+          title: "Thất bại, " + res.message,
+        });
       }
     });
-  }
+  };
+
   return (
     <div className="offer-item">
       <Row>
@@ -40,54 +41,70 @@ const OfferItem = ({ offer, job }) => {
                   src="https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"
                   alt="avatar"
                 />
-                </Link>
-              </Col>
-              <Col>
-                <Rating
-                  readonly
-                  initialRating={3}
-                  emptySymbol={
-                    <img
-                      src="/images/star-empty.png"
-                      className="offer-item__rating-icon"
-                      alt=""
-                    />
-                  }
-                  fullSymbol={
-                    <img
-                      src="/images/star-full.png"
-                      className="offer-item__rating-icon"
-                      alt=""
-                    />
-                  }
-                />
-              </Col>
-            </Row>
-          </Col>
+              </Link>
+            </Col>
+            <Col>
+              <Rating
+                readonly
+                initialRating={3}
+                emptySymbol={
+                  <img
+                    src="/images/star-empty.png"
+                    className="offer-item__rating-icon"
+                    alt=""
+                  />
+                }
+                fullSymbol={
+                  <img
+                    src="/images/star-full.png"
+                    className="offer-item__rating-icon"
+                    alt=""
+                  />
+                }
+              />
+            </Col>
+          </Row>
+        </Col>
 
         <Col>
           <Row>
             <Col>
               <Link to={`/users/${offer.freelancer_id}`}>
-                <div className="offer-item__full-name">{freelancer.user_information &&
-                      (freelancer.user_information.fullname != null
-                        ? freelancer.user_information.fullname
-                        : freelancer.name)}</div>
+                <div className="offer-item__full-name">
+                  {freelancer.user_information &&
+                    (freelancer.user_information.fullname != null
+                      ? freelancer.user_information.fullname
+                      : freelancer.name)}
+                </div>
               </Link>
             </Col>
-              <Col xs="auto">
-                {account && account.id === job.employer_id ? (
-                  <Button className="btn-success" size="md" onClick={() => selectOffer()}>
-                    Chọn ứng viên
-                  </Button>
-                ) : (
-                  ""
-                )}
-              </Col>
+            <Col xs="auto">
+              {account && account.id === job.employer_id && job.status == 0 ? (
+                <Button
+                  className="btn-success"
+                  size="md"
+                  onClick={() => selectOffer()}
+                >
+                  Chọn ứng viên
+                </Button>
+              ) : (
+                ""
+              )}
+
+              {job.freelancer_id && job.freelancer_id === freelancer.id ? (
+                <Button className="btn-info" size="md">
+                  Được chọn
+                </Button>
+              ) : (
+                ""
+              )}
+            </Col>
           </Row>
           <Row>
             <Col>
-              <div className="offer-item__job-title">{offer.freelancer_detail.user_information.bio}</div>
+              <div className="offer-item__job-title">
+                {offer.freelancer_detail.user_information.bio}
+              </div>
             </Col>
           </Row>
 
@@ -96,14 +113,16 @@ const OfferItem = ({ offer, job }) => {
               <div>
                 <span className="offer-item__field">Kỹ năng:&nbsp;&nbsp;</span>
                 <span className="offer-item__field-value">
-                  {offer.freelancer_detail.user_information.skill.split("|").map((skill, index) => (
-                    <Link to="#/" key={index}>
-                      <Badge pill variant="secondary">
-                        {skill}
-                      </Badge>
-                      <span> </span>
-                    </Link>
-                  ))}
+                  {offer.freelancer_detail.user_information.skill
+                    .split("|")
+                    .map((skill, index) => (
+                      <Link to="#/" key={index}>
+                        <Badge pill variant="secondary">
+                          {skill}
+                        </Badge>
+                        <span> </span>
+                      </Link>
+                    ))}
                 </span>
               </div>
             </Col>
@@ -115,29 +134,33 @@ const OfferItem = ({ offer, job }) => {
             <Col xs={5} className="offer-item__field">
               Đến từ
             </Col>
-            <Col className="offer-item__field-value">{offer.freelancer_detail.user_information.address}</Col>
+            <Col className="offer-item__field-value">
+              {offer.freelancer_detail.user_information.address}
+            </Col>
           </Row>
           <Row>
             <Col xs={5} className="offer-item__field">
-            Giá đề xuất
+              Giá đề xuất
             </Col>
             <Col className="offer-item__field-value">
-              {offer.balance}
+              {toVND(offer.balance)}
             </Col>
           </Row>
           <Row>
             <Col xs={5} className="offer-item__field">
-            Ước tính
+              Ước tính
             </Col>
             <Col className="offer-item__field-value">
-            {offer.expect_day} ngày
+              {offer.expect_day} ngày
             </Col>
           </Row>
           <Row>
             <Col xs={5} className="offer-item__field">
-            Ngày
+              Ngày
             </Col>
-            <Col className="offer-item__field-value">{toString(offer.created_at)}</Col>
+            <Col className="offer-item__field-value">
+              {toString(offer.created_at)}
+            </Col>
           </Row>
         </Col>
       </Row>

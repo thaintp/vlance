@@ -28,7 +28,12 @@ const Jobs = () => {
   }, [currentPages]);
 
   return (
-    <div className="jobs-page not-fluid">
+    <div
+      className="jobs-page not-fluid"
+      style={{
+        paddingBottom: "100px",
+      }}
+    >
       <Container fluid>
         <Row>
           <Col className="jobs-page__sidebar" xs={2}>
@@ -50,13 +55,20 @@ const Jobs = () => {
                 <JobList jobs={jobs}></JobList>
               </Row>
               <Row>
-                <CustomPagination
-                  key={totalRecords}
-                  totalRecords={totalRecords}
-                  pageLimit={10}
-                  pageNeighbours={1}
-                  onPageChanged={(page_data) => onPageChange(page_data)}
-                />
+                <div
+                  style={{
+                    marginLeft: "20px",
+                    marginTop: "10px",
+                  }}
+                >
+                  <CustomPagination
+                    key={totalRecords}
+                    totalRecords={totalRecords}
+                    pageLimit={10}
+                    pageNeighbours={1}
+                    onPageChanged={(page_data) => onPageChange(page_data)}
+                  />
+                </div>
               </Row>
             </Container>
           </Col>
