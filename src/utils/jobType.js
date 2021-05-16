@@ -1,4 +1,4 @@
 const jobType = [
-  "Project", "Toàn thời gian", "Bán thời gian"
+  "Dự án", "Toàn thời gian", "Bán thời gian"
 ]
 export default jobType;
