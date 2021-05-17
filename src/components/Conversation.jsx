@@ -76,7 +76,8 @@ const Conversation = ({ job_id }) => {
       <Row>
         <Col md={12} lg={3}>
           <JobInfo job={job} />
-          <ControlBox job_id={job_id} />
+          {job.status != 4 ? <ControlBox job_id={job_id} /> : ""}
+          {/* {{TODO hien thi review nếu chưa review, với các job đã hoàn thành. Hậu làm ở dưới có cái form đăng review rồi nha}} */}
         </Col>
 
         <Col>
