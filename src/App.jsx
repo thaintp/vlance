@@ -34,6 +34,9 @@ function App() {
           <Route path="/profile">
             <Profile></Profile>
           </Route>
+          <Route path="/users">
+          <ListFreelancer></ListFreelancer>
+          </Route>
           <Route path="/users/:id">
             <Profile></Profile>
           </Route>
