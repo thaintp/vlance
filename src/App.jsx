@@ -47,6 +47,9 @@ function App() {
           <Route path="/profile">
             <Profile></Profile>
           </Route>
+          <Route exact path="/users">
+          <ListFreelancer></ListFreelancer>
+          </Route>
           <Route path="/users/:id">
             <Profile></Profile>
           </Route>
@@ -55,6 +58,9 @@ function App() {
           </Route>
           <Route path="/change-password">
             <ChangePassword></ChangePassword>
+          </Route>
+          <Route path="/job2">
+            <Job2></Job2>
           </Route>
           <Route path="/">
             <Redirect to="/" />

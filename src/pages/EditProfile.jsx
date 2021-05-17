@@ -92,9 +92,36 @@ const EditProfile = () => {
                                                                         </div>
                                                                         <input type="text" class="form-control form-control-lg form-control-solid" value="nick.watson@loop.com" placeholder="Email" />
                                                                     </div>
-                                                                    <span class="form-text text-muted">Email will not be publicly displayed.
-                                                                        <a href="/#" class="font-weight-bold"> Learn more</a>.
-                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Phone</label>
+                                                                <div class="col-lg-9 col-xl-6">
+                                                                    <input class="form-control form-control-lg form-control-solid" type="text" value="nick84" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Address</label>
+                                                                <div class="col-lg-9 col-xl-6">
+                                                                    <input class="form-control form-control-lg form-control-solid" type="text" value="nick84" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Bio</label>
+                                                                <div class="col-lg-9 col-xl-6">
+                                                                    <textarea class="form-control form-control-lg form-control-solid" value="nick84" row="4" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Experience</label>
+                                                                <div class="col-lg-9 col-xl-6">
+                                                                    <textarea class="form-control form-control-lg form-control-solid" value="nick84" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Skill</label>
+                                                                <div class="col-lg-9 col-xl-6">
+                                                                    <input class="form-control form-control-lg form-control-solid" type="text" value="nick84" />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row align-items-center">
@@ -111,34 +138,6 @@ const EditProfile = () => {
                                                                             <input type="checkbox" />
                                                                             <span></span>Phone</label>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="separator separator-dashed my-5"></div>
-                                                            <div class="row">
-                                                                <label class="col-xl-3"></label>
-                                                                <div class="col-lg-9 col-xl-6">
-                                                                    <h5 class="font-weight-bold mb-6">Security:</h5>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Login verification</label>
-                                                                <div class="col-lg-9 col-xl-6">
-                                                                    <button type="button" class="btn btn-light-primary font-weight-bold btn-sm">Setup login verification</button>
-                                                                    <p class="form-text text-muted pt-2">After you log in, you will be asked for additional information to confirm your identity and protect your account from being compromised.
-                                                        <a href="/#" class="font-weight-bold">Learn more</a>.</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Password reset verification</label>
-                                                                <div class="col-lg-9 col-xl-6">
-                                                                    <div class="checkbox-inline">
-                                                                        <label class="checkbox m-0">
-                                                                            <input type="checkbox" />
-                                                                            <span></span>Require personal information to reset your password.</label>
-                                                                    </div>
-                                                                    <p class="form-text text-muted py-2">For extra security, this requires you to confirm your email or phone number when you reset your password.
-                                                        <a href="/#" class="font-weight-boldk">Learn more</a>.</p>
-                                                                    <button type="button" class="btn btn-light-danger font-weight-bold btn-sm">Deactivate your account ?</button>
                                                                 </div>
                                                             </div>
                                                         </div>
