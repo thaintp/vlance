@@ -1,5 +1,6 @@
 import "./style.scss";
 import Button from "react-bootstrap/Button";
+import Swal from "sweetalert2";
 
 import { Link } from "react-router-dom";
 import { ImAttachment } from "react-icons/im";
@@ -69,12 +70,13 @@ const Conversation = ({ job_id }) => {
       }
     });
   };
+
   return (
     <div className="conversation">
       <Row>
         <Col md={12} lg={3}>
           <JobInfo job={job} />
-          <ControlBox />
+          <ControlBox job_id={job_id} />
         </Col>
 
         <Col>
@@ -97,7 +99,7 @@ const Conversation = ({ job_id }) => {
                 ></textarea>
                 <Row>
                   <Col>
-                    <Link>
+                    <Link to="#">
                       <ImAttachment />
                     </Link>
                   </Col>
@@ -112,13 +114,6 @@ const Conversation = ({ job_id }) => {
               {/* {//end send message} */}
 
               <ChatHistory conversations={conversations} />
-            </Tab>
-
-            <Tab eventKey="job_action" title="Quản lý job">
-              <Container>
-                <Row>ABC</Row>
-                <Row>ABC</Row>
-              </Container>
             </Tab>
           </Tabs>
         </Col>
@@ -192,7 +187,70 @@ const ReviewBox = () => {
     </div>
   );
 };
-const ControlBox = () => {
+const ControlBox = ({ job_id }) => {
+  const handleCancelJob = () => {
+    Swal.fire({
+      title: "Hủy dự án?",
+      text: "Bạn có chắc hủy dự án",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+      cancelButtonText: "Hủy",
+    }).then((result) => {
+      if (result.value) {
+        JobService.cancelJob({
+          job_id: parseInt(job_id),
+        }).then((res) => {
+          if (res.status) {
+            Toast.fire({
+              icon: "success",
+              title: "Xác nhận hủy thành công",
+            });
+            window.location.reload(false);
+          } else {
+            Toast.fire({
+              icon: "error",
+              title: "Hủy thất bại ," + res.message,
+            });
+          }
+        });
+      }
+    });
+  };
+
+  const handleFinishJob = () => {
+    Swal.fire({
+      title: "Hoàn thành dự án?",
+      text: "Bạn có chắc hoàn thành dự án",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+      cancelButtonText: "Hủy",
+    }).then((result) => {
+      if (result.value) {
+        JobService.finishJob({
+          job_id: parseInt(job_id),
+        }).then((res) => {
+          if (res.status) {
+            Toast.fire({
+              icon: "success",
+              title: "Xác nhận hoàn thành dự án thành công",
+            });
+            window.location.reload(false);
+          } else {
+            Toast.fire({
+              icon: "error",
+              title: "Hoàn thành dự án thất bại, " + res.message,
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <div className="conversation__review-box">
       <div className="conversation__review-box__title">Quản lý</div>
@@ -204,7 +262,7 @@ const ControlBox = () => {
             style={{
               minWidth: "200px",
             }}
-            onClick={() => console.log("End job")}
+            onClick={handleFinishJob}
           >
             Kết thúc dự án
           </Button>
@@ -215,7 +273,7 @@ const ControlBox = () => {
           <Button
             variant="danger"
             size="md"
-            onClick={() => console.log("Cancel job")}
+            onClick={handleCancelJob}
             style={{
               minWidth: "200px",
             }}
@@ -240,7 +298,7 @@ const ChatBox = () => {
       ></textarea>
       <Row>
         <Col>
-          <Link>
+          <Link to="#">
             <ImAttachment />
           </Link>
         </Col>
@@ -279,7 +337,7 @@ const MessageItem = ({ conv }) => {
     <div>
       <Row className="conversation__message-item">
         <Col xs={2}>
-          <Link>
+          <Link to="#">
             <img
               className="conversation__message-item__avatar"
               src="https://i.loli.net/2021/04/16/BnZIhjMmzTDecEH.jpg"
@@ -288,7 +346,7 @@ const MessageItem = ({ conv }) => {
           </Link>
         </Col>
         <Col>
-          <Link>
+          <Link to="#">
             <div className="conversation__message-item__from-user">
               {conv?.from_user_detail?.user_information?.fullname}
             </div>
