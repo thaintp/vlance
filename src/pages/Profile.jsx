@@ -21,8 +21,8 @@ const Profile = () => {
         }
     }, [])
     useEffect(() => {
-        JobService.get({ employer_id: account.id }).then((data) => setEJobs(data.data));
-        JobService.get({ freelancer_id: account.id }).then((data) => setFJobs(data.data));
+        JobService.get({ employer_id: account.id }).then((data) => setEJobs(data?.data));
+        JobService.get({ freelancer_id: account.id }).then((data) => setFJobs(data?.data));
     }, [account])
     return ((id || auth.account) ?
         <html lang="en">
