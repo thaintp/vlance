@@ -74,7 +74,7 @@ const Conversation = ({ job_id }) => {
       <Row>
         <Col md={12} lg={3}>
           <JobInfo job={job} />
-          <ReviewBox />
+          <ControlBox />
         </Col>
 
         <Col>
@@ -180,7 +180,7 @@ const ReviewBox = () => {
   return (
     <div className="conversation__review-box">
       <div className="conversation__review-box__title">
-        Bạn đánh giá thế nào về khách hàng?
+        Quản lý trạng thái job
       </div>
       <div className="conversation__review-box__btn-wrapper">
         <ReviewButton variant="warning" text="Nhận xét khách hàng" />
@@ -188,6 +188,41 @@ const ReviewBox = () => {
       <div className="conversation__review-box__sub-title">
         Gửi <strong>nhận xét về khách hàng</strong> giúp bạn tăng thêm nhiều cơ
         hội về việc làm hơn
+      </div>
+    </div>
+  );
+};
+const ControlBox = () => {
+  return (
+    <div className="conversation__review-box">
+      <div className="conversation__review-box__title">Quản lý</div>
+      <div className="conversation__review-box__btn-wrapper">
+        <Row>
+          <Button
+            variant="success"
+            size="md"
+            style={{
+              minWidth: "200px",
+            }}
+            onClick={() => console.log("End job")}
+          >
+            Kết thúc dự án
+          </Button>
+        </Row>
+      </div>
+      <div className="conversation__review-box__btn-wrapper">
+        <Row>
+          <Button
+            variant="danger"
+            size="md"
+            onClick={() => console.log("Cancel job")}
+            style={{
+              minWidth: "200px",
+            }}
+          >
+            Yêu cầu hủy dự án
+          </Button>
+        </Row>
       </div>
     </div>
   );
