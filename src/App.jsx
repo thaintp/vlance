@@ -13,6 +13,7 @@ import {
   Job2,
   ListFreelancer,
   JobConversation,
+  Job2,
 } from "pages";
 import { TopBar, NavBar } from "components";
 import { history } from "./helpers/history";
