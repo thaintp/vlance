@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { Redirect, useParams } from 'react-router-dom'
+import { Redirect, useParams, Link } from 'react-router-dom'
 import JobService from "services/job";
 import UserService from "services/user";
 import { map_status } from "utils/status";
+import { toVND } from 'utils/number';
+import Badge from "react-bootstrap/Badge";
 
 const Profile = () => {
     const { id } = useParams();
@@ -79,6 +81,21 @@ const Profile = () => {
                                                                 </div>
                                                                 <span class="font-weight-bold text-dark-50">{account.user_information?.bio}</span>
                                                                 <span class="font-weight-bold text-dark-50">{account.user_information?.experience}</span>
+                                                                <div>
+                                                                    <span className="font-weight-bold text-dark-50">Kỹ năng:&nbsp;&nbsp;</span>
+                                                                    <span className="offer-item__field-value">
+                                                                    {account.user_information?.skill
+                                                                        .split("|")
+                                                                        .map((skill, index) => (
+                                                                        <Link to="#/" key={index}>
+                                                                            <Badge pill variant="secondary">
+                                                                            {skill}
+                                                                            </Badge>
+                                                                            <span> </span>
+                                                                        </Link>
+                                                                        ))}
+                                                                    </span>
+                                                                </div>
                                                             </div>
 
                                                         </div>
@@ -93,7 +110,7 @@ const Profile = () => {
                                                         <div class="d-flex flex-column text-dark-75">
                                                             <span class="font-weight-bolder font-size-sm">Balance</span>
                                                             <span class="font-weight-bolder font-size-h5">
-                                                                <span class="text-dark-50 font-weight-bold">$</span>249,500</span>
+                                                                <span class="text-dark-50 font-weight-bold"></span>{toVND(account.user_information?.balance)}</span>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
@@ -101,10 +118,9 @@ const Profile = () => {
                                                             <i class="flaticon-confetti display-4 text-muted font-weight-bold"></i>
                                                         </span>
                                                         <div class="d-flex flex-column text-dark-75">
-                                                            <span class="font-weight-bolder font-size-sm">Expenses</span>
+                                                            <span class="font-weight-bolder font-size-sm">Hold balance</span>
                                                             <span class="font-weight-bolder font-size-h5">
-                                                                <span class="text-dark-50 font-weight-bold">$</span>164,700
-                                                    </span>
+                                                                <span class="text-dark-50 font-weight-bold"></span>{toVND(account.user_information?.hold_balance)}</span>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
@@ -112,9 +128,9 @@ const Profile = () => {
                                                             <i class="flaticon-pie-chart display-4 text-muted font-weight-bold"></i>
                                                         </span>
                                                         <div class="d-flex flex-column text-dark-75">
-                                                            <span class="font-weight-bolder font-size-sm">Skill</span>
+                                                            <span class="font-weight-bolder font-size-sm">Earn balance</span>
                                                             <span class="font-weight-bolder font-size-h5">
-                                                                <span class="text-dark-50 font-weight-bold">$</span>782,300</span>
+                                                                <span class="text-dark-50 font-weight-bold"></span>{toVND(account.user_information?.earn_balance)}</span>
                                                         </div>
                                                     </div>
                                                 </div>
