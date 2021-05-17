@@ -1,4 +1,31 @@
+import { useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { changeInfo } from 'actions/user'
+
 const EditProfile = () => {
+    const dispatch = useDispatch();
+    const { account } = useSelector(state => state.auth);
+    const fullnameRef = useRef();
+    const mailRef = useRef();
+    const phoneRef = useRef();
+    const addressRef = useRef();
+    const bioRef = useRef();
+    const expRef = useRef();
+    const skillRef = useRef();
+
+    const handleChangeInfo = () => {
+      dispatch(changeInfo({
+        fullname: fullnameRef.current.value,
+        email: mailRef.current.value,
+        phone: phoneRef.current.value,
+        address: addressRef.current.value,
+        bio: bioRef.current.value,
+        experience: expRef.current.value,
+        skill: skillRef.current.value,
+      }))
+    }
+
     return (
         <html lang="en">
             <head>
@@ -30,26 +57,26 @@ const EditProfile = () => {
                                                                 <i class="symbol-badge bg-success"></i>
                                                             </div>
                                                             <div>
-                                                                <a href="/#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">James Jones</a>
-                                                                <div class="text-muted">Application Developer</div>
+                                                                <Link to={`/users/${account.id}`} class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">{account.user_information.fullname}</Link>
+                                                                <div class="text-muted">{account.user_information.bio}</div>
                                                                 <div class="mt-2">
-                                                                    <a href="/#" class="btn btn-sm btn-light-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</a>
-                                                                    <a href="/#" class="btn btn-sm btn-light-success font-weight-bold py-2 px-3 px-xxl-5 my-1">Follow</a>
+                                                                    <btn class="btn btn-sm btn-light-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</btn>
+                                                                    <btn class="btn btn-sm btn-light-success font-weight-bold py-2 px-3 px-xxl-5 my-1">Follow</btn>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="py-9">
                                                             <div class="d-flex align-items-center justify-content-between mb-2">
                                                                 <span class="font-weight-bold mr-2">Email:</span>
-                                                                <a href="/#" class="text-muted text-hover-primary">matt@fifestudios.com</a>
+                                                                <a href={`mailto:${account.email}`} class="text-muted text-hover-primary">{account.email}</a>
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between mb-2">
                                                                 <span class="font-weight-bold mr-2">Phone:</span>
-                                                                <span class="text-muted">44(76)34254578</span>
+                                                                <span class="text-muted">{account.user_information.phone}</span>
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <span class="font-weight-bold mr-2">Location:</span>
-                                                                <span class="text-muted">Melbourne</span>
+                                                                <span class="text-muted">{account.user_information.address}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -63,8 +90,8 @@ const EditProfile = () => {
                                                             <span class="text-muted font-weight-bold font-size-sm mt-1">Change your account settings</span>
                                                         </div>
                                                         <div class="card-toolbar">
-                                                            <button type="reset" class="btn btn-success mr-2">Save Changes</button>
-                                                            <button type="reset" class="btn btn-secondary">Cancel</button>
+                                                            <button type="reset" class="btn btn-success mr-2" onClick={() => handleChangeInfo()}>Save Changes</button>
+                                                            <Link to={`/profile`} class="btn btn-secondary">Cancel</Link>
                                                         </div>
                                                     </div>
                                                     <form class="form">
@@ -76,9 +103,10 @@ const EditProfile = () => {
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label class="col-xl-3 col-lg-3 col-form-label">Username</label>
+                                                                <label class="col-xl-3 col-lg-3 col-form-label">Fullname</label>
                                                                 <div class="col-lg-9 col-xl-6">
-                                                                    <input class="form-control form-control-lg form-control-solid" type="text" value="nick84" />
+                                                                    <input class="form-control form-control-lg form-control-solid" type="text" defaultValue={account.user_information?.fullname}
+                                                                    ref={fullnameRef} />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -90,38 +118,38 @@ const EditProfile = () => {
                                                                                 <i class="la la-at"></i>
                                                                             </span>
                                                                         </div>
-                                                                        <input type="text" class="form-control form-control-lg form-control-solid" value="nick.watson@loop.com" placeholder="Email" />
+                                                                        <input type="text" class="form-control form-control-lg form-control-solid" defaultValue={account.email} ref={mailRef} placeholder="Email" />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">Phone</label>
                                                                 <div class="col-lg-9 col-xl-6">
-                                                                    <input class="form-control form-control-lg form-control-solid" type="text" value="nick84" />
+                                                                    <input class="form-control form-control-lg form-control-solid" type="text" defaultValue={account.user_information?.phone} ref={phoneRef} />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">Address</label>
                                                                 <div class="col-lg-9 col-xl-6">
-                                                                    <input class="form-control form-control-lg form-control-solid" type="text" value="nick84" />
+                                                                    <input class="form-control form-control-lg form-control-solid" type="text" defaultValue={account.user_information?.address} ref={addressRef} />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">Bio</label>
                                                                 <div class="col-lg-9 col-xl-6">
-                                                                    <textarea class="form-control form-control-lg form-control-solid" value="nick84" row="4" />
+                                                                    <textarea class="form-control form-control-lg form-control-solid" defaultValue={account.user_information?.bio} ref={bioRef} row="4" />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">Experience</label>
                                                                 <div class="col-lg-9 col-xl-6">
-                                                                    <textarea class="form-control form-control-lg form-control-solid" value="nick84" />
+                                                                    <textarea class="form-control form-control-lg form-control-solid" defaultValue={account.user_information?.experience} ref={expRef} />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-xl-3 col-lg-3 col-form-label">Skill</label>
                                                                 <div class="col-lg-9 col-xl-6">
-                                                                    <input class="form-control form-control-lg form-control-solid" type="text" value="nick84" />
+                                                                    <input class="form-control form-control-lg form-control-solid" type="text" defaultValue={account.user_information?.skill} ref={skillRef} />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row align-items-center">
@@ -148,7 +176,7 @@ const EditProfile = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+                            {/* <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
                                 <div class="text-dark order-2 order-md-1">
                                 </div>
                                 <div class="nav nav-dark order-1 order-md-2"> 
@@ -156,7 +184,7 @@ const EditProfile = () => {
                                     <a href="/#" target="_blank" rel="noreferrer" class="nav-link px-3">Team</a>
                                     <a href="/#" target="_blank" rel="noreferrer" class="nav-link pl-3 pr-0">Contact</a>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

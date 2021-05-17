@@ -17,3 +17,6 @@ export const LOADING = "LOADING";
 export const LOADED = "LOADED";
 
 export const PAGINATE = "PAGINATE";
+
+export const CHANGE_INFORMATION = "CHANGE_INFORMATION";
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD";

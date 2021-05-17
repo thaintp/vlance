@@ -4,6 +4,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  CHANGE_INFORMATION,
+  CHANGE_PASSWORD
 } from "../actions/types";
 
 const account = JSON.parse(localStorage.getItem("user"));
@@ -44,6 +46,12 @@ const authReducer = (state = initialState, action) => {
         isLoggedIn: false,
         account: undefined,
       };
+    case CHANGE_INFORMATION:
+    case CHANGE_PASSWORD:
+      return {
+        ...state,
+        account: payload.data
+      }
     default:
       return state;
   }
