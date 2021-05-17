@@ -1,7 +1,7 @@
 import "App.scss";
 
 import { Router, Switch, Route, Redirect } from "react-router-dom";
-import { Home, Jobs, JobDetail, JobManager, PostJob, Profile, EditProfile, ChangePassword, Job2, ListFreelancer, Review } from "pages";
+import { Home, Jobs, JobDetail, JobManager, PostJob, Profile, EditProfile, ChangePassword, Job2, ListFreelancer } from "pages";
 import { TopBar, NavBar } from "components";
 import { history } from "./helpers/history";
 
@@ -49,9 +49,9 @@ function App() {
           <Route path="/job2">
             <Job2></Job2>
           </Route>
-          <Route path="/review">
+          {/* <Route path="/review">
             <Review></Review>
-          </Route>
+          </Route> */}
           <Route path="/">
             <Redirect to="/" />
           </Route>

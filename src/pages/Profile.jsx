@@ -3,15 +3,18 @@ import { useSelector } from 'react-redux';
 import { Redirect, useParams, Link } from 'react-router-dom'
 import JobService from "services/job";
 import UserService from "services/user";
+import ReviewService from "services/review";
 import { map_status } from "utils/status";
 import { toVND } from 'utils/number';
 import Badge from "react-bootstrap/Badge";
+import { Review } from 'components'
 
 const Profile = () => {
     const { id } = useParams();
     const [ account, setAccount ] = useState({});
     const [eJobs, setEJobs] = useState([]);
     const [fJobs, setFJobs] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const auth = useSelector((state) => state.auth);
     useEffect(() => {
         if (id) {
@@ -23,6 +26,7 @@ const Profile = () => {
     useEffect(() => {
         JobService.get({ employer_id: account.id }).then((data) => setEJobs(data?.data));
         JobService.get({ freelancer_id: account.id }).then((data) => setFJobs(data?.data));
+        ReviewService.get({user_id: account.id}).then((data) => setReviews(data?.data));
     }, [account])
     return ((id || auth.account) ?
         <html lang="en">
@@ -136,6 +140,7 @@ const Profile = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <Review />
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="card card-custom card-stretch gutter-b">
