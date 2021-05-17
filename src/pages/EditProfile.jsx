@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { changeInfo } from 'actions/user'
 
 const EditProfile = () => {
     const dispatch = useDispatch();
-    const { account } = useSelector(state => state.auth);
+    const { isLoggedIn, account } = useSelector(state => state.auth);
     const fullnameRef = useRef();
     const mailRef = useRef();
     const phoneRef = useRef();
@@ -27,6 +27,7 @@ const EditProfile = () => {
     }
 
     return (
+        isLoggedIn ? 
         <html lang="en">
             <head>
                 <base href="../../../../"/>
@@ -190,6 +191,7 @@ const EditProfile = () => {
                 </div>
             </body>
         </html>
+            : <Redirect to="/" />
     );
 };
 

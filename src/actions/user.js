@@ -5,7 +5,7 @@ import UserService from 'services/user';
 
 export const changeInfo = (info) => dispatch => {
   return UserService.changeInfo(info).then(data => {
-    if (data.status) {
+    if (data?.status) {
       Toast.fire({
         icon: "success",
         title: "Thay đổi thông tin thành công",
