@@ -6,3 +6,4 @@ export { default as PostJob } from "./PostJob";
 export { default as Profile } from "./Profile";
 export { default as EditProfile } from "./EditProfile";
 export { default as ChangePassword } from "./ChangePassword";
+export { default as JobConversation } from "./JobConversation";

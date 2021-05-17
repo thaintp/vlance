@@ -10,6 +10,7 @@ import {
   Profile,
   EditProfile,
   ChangePassword,
+  JobConversation,
 } from "pages";
 import { TopBar, NavBar } from "components";
 import { history } from "./helpers/history";
@@ -33,10 +34,13 @@ function App() {
           <Route exact path="/jobs">
             <Jobs></Jobs>
           </Route>
+          <Route path="/conversation/:id" component={JobConversation} />
+
           <Route path="/job-manager/:role">
             <JobManager></JobManager>
           </Route>
           <Route path="/jobs/:id" component={JobDetail} />
+
           <Route path="/postjob">
             <PostJob></PostJob>
           </Route>
