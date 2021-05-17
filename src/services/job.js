@@ -93,6 +93,24 @@ class JobService {
       .then((response) => response.data)
       .catch((error) => console.error(error));
   }
+  async finishJob(body = {}) {
+    return await axios({
+      method: "GET",
+      url: `/finish_job`,
+      params: body,
+    })
+      .then((response) => response.data)
+      .catch((error) => console.error(error));
+  }
+  async cancelJob(body = {}) {
+    return await axios({
+      method: "GET",
+      url: `/cancel_job`,
+      params: body,
+    })
+      .then((response) => response.data)
+      .catch((error) => console.error(error));
+  }
   async getByState(state) {
     return fake.filter((x) => x.state === state);
   }
