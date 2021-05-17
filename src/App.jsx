@@ -34,7 +34,7 @@ function App() {
           <Route path="/profile">
             <Profile></Profile>
           </Route>
-          <Route path="/users">
+          <Route exact path="/users">
           <ListFreelancer></ListFreelancer>
           </Route>
           <Route path="/users/:id">
@@ -48,9 +48,6 @@ function App() {
           </Route>
           <Route path="/job2">
             <Job2></Job2>
-          </Route>
-          <Route path="/list-freelancer">
-            <ListFreelancer></ListFreelancer>
           </Route>
           <Route path="/">
             <Redirect to="/" />
