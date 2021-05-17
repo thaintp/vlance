@@ -10,7 +10,9 @@ import {
   Profile,
   EditProfile,
   ChangePassword,
+  ListFreelancer,
   JobConversation,
+  Job2,
 } from "pages";
 import { TopBar, NavBar } from "components";
 import { history } from "./helpers/history";
@@ -48,7 +50,7 @@ function App() {
             <Profile></Profile>
           </Route>
           <Route exact path="/users">
-          <ListFreelancer></ListFreelancer>
+            <ListFreelancer></ListFreelancer>
           </Route>
           <Route path="/users/:id">
             <Profile></Profile>
