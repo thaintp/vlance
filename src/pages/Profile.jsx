@@ -26,7 +26,7 @@ const Profile = () => {
     useEffect(() => {
         JobService.get({ employer_id: account.id }).then((data) => setEJobs(data?.data));
         JobService.get({ freelancer_id: account.id }).then((data) => setFJobs(data?.data));
-        ReviewService.get({user_id: account.id}).then((data) => setReviews(data?.data));
+        account.id && ReviewService.get({user_id: account.id}).then((data) => setReviews(data?.data));
     }, [account])
     return ((id || auth.account) ?
         <html lang="en">
@@ -140,7 +140,7 @@ const Profile = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <Review />
+                                        <Review reviews={reviews} />
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="card card-custom card-stretch gutter-b">
@@ -296,7 +296,7 @@ const Profile = () => {
                                                                             {/* List jobs here */}
                                                                             {
                                                                                 [...eJobs, ...fJobs].map(job => (
-                                                                                    <tr key={job.id}>
+                                                                            <tr key={job.id}>
                                                                                 <td class="pl-0 py-4">
                                                                                     <div class="symbol symbol-50 symbol-light mr-1">
                                                                                         <span class="symbol-label">
@@ -313,7 +313,7 @@ const Profile = () => {
                                                                                         <span
                                                                                             class="font-weight-bolder">Email:</span>
                                                                                         <a class="text-muted font-weight-bold text-hover-primary"
-                                                                                            href="/#">{job.employer_detail?.email}</a>
+                                                                                            href="/#">{" " + job.employer_detail?.email}</a>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td class="text-right">

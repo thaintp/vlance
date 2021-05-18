@@ -18,6 +18,7 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
+import ReviewService from 'services/review'
 
 const Conversation = ({ job_id }) => {
   //id job_id
@@ -50,7 +51,11 @@ const Conversation = ({ job_id }) => {
   }, [job_id]);
 
   useEffect(() => {
-    setCanReview(job.status === 4 && (job.employer_id === account.id || job.freelancer_id === account.id));
+    if (job.status === 4 && (job.employer_id === account.id || job.freelancer_id === account.id)) {
+      ReviewService.checkCanReview(job_id, account.id).then(data => setCanReview(!(data?.data)));
+    } else {
+      setCanReview(false);
+    }
   }, [job, account]);
 
   const onChangeMessage = (e) => {
@@ -82,8 +87,8 @@ const Conversation = ({ job_id }) => {
       <Row>
         <Col md={12} lg={3}>
           <JobInfo job={job} />
-          {job.status !== 4 && <ControlBox job_id={job_id} />}
-          {canReview && <ReviewBox />}
+          {(job.status !== 4 && job.employer_id === account.id) && <ControlBox job_id={job_id} />}
+          {canReview && <ReviewBox job_id={job_id} />}
         </Col>
 
         <Col>
@@ -178,14 +183,14 @@ const JobInfo = ({ job }) => {
   );
 };
 
-const ReviewBox = () => {
+const ReviewBox = ({ job_id }) => {
   return (
     <div className="conversation__review-box">
       {/* <div className="conversation__review-box__title">
       Nhận xét công việc
       </div> */}
       <div className="conversation__review-box__btn-wrapper">
-        <ReviewButton variant="warning" text="Nhận xét công việc" />
+        <ReviewButton variant="warning" text="Nhận xét công việc" job_id={job_id} />
       </div>
       <div className="conversation__review-box__sub-title">
         Gửi <strong>nhận xét về công việc</strong> giúp bạn tăng thêm nhiều cơ
