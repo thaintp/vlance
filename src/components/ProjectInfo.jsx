@@ -7,8 +7,11 @@ import { Link } from "react-router-dom";
 import { toString } from "utils/date";
 import { toVND } from "utils/number";
 import jobType from "utils/jobType";
+import { useSelector } from "react-redux";
 
 const ProjectInfo = ({ job }) => {
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   return (
     <div className="project-info">
       <Container className="project-info__job">
@@ -108,7 +111,7 @@ const ProjectInfo = ({ job }) => {
           </Col>
         </Row> */}
         <Link to={`/conversation/${job.id}`}>
-          <Button className="w-100 my-4 btn-success">Thảo luận dự án</Button>
+          <Button className="w-100 my-4 btn-success" disabled={!isLoggedIn}>Thảo luận dự án</Button>
         </Link>
       </Container>
     </div>

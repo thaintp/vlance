@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 import { Link } from "react-router-dom";
 import { ImAttachment } from "react-icons/im";
-import { ReviewButton } from "components";
+import { Review, ReviewButton } from "components";
 import { useState, useEffect } from "react";
 import JobService from "services/job";
 import { toVND } from "utils/number";
@@ -27,6 +27,8 @@ const Conversation = ({ job_id }) => {
   const [message, setMessage] = useState("");
   const [toUser, setToUser] = useState(0);
   const [key, setKey] = useState("chat");
+  const [canReview, setCanReview] = useState(false);
+
   useEffect(() => {
     JobService.getByID(parseInt(job_id)).then((data) => {
       setJob(data.data);
@@ -46,6 +48,10 @@ const Conversation = ({ job_id }) => {
       order_by: "desc",
     }).then((data) => setConversations(data.data));
   }, [job_id]);
+
+  useEffect(() => {
+    setCanReview(job.status === 4 && (job.employer_id === account.id || job.freelancer_id === account.id));
+  }, [job, account]);
 
   const onChangeMessage = (e) => {
     setMessage(e.target.value);
@@ -76,8 +82,8 @@ const Conversation = ({ job_id }) => {
       <Row>
         <Col md={12} lg={3}>
           <JobInfo job={job} />
-          {job.status != 4 ? <ControlBox job_id={job_id} /> : ""}
-          {/* {{TODO hien thi review nếu chưa review, với các job đã hoàn thành. Hậu làm ở dưới có cái form đăng review rồi nha}} */}
+          {job.status !== 4 && <ControlBox job_id={job_id} />}
+          {canReview && <ReviewBox />}
         </Col>
 
         <Col>
@@ -104,7 +110,7 @@ const Conversation = ({ job_id }) => {
                       <ImAttachment />
                     </Link>
                   </Col>
-                  <Col xs="auto">
+                  <Col xs="auto" className="mt-2">
                     <Button variant="success" onClick={handleSendMessage}>
                       Gửi
                     </Button>
@@ -165,7 +171,7 @@ const JobInfo = ({ job }) => {
           Số ngày dự kiến
         </Col>
         <Col className="conversation__job-info__field-value">
-          {job?.freelancer_applicant?.expect_day} ngày
+          {job?.freelancer_applicant?.expect_day ?? "0"} ngày
         </Col>
       </Row>
     </div>
@@ -175,15 +181,15 @@ const JobInfo = ({ job }) => {
 const ReviewBox = () => {
   return (
     <div className="conversation__review-box">
-      <div className="conversation__review-box__title">
-        Quản lý trạng thái job
-      </div>
+      {/* <div className="conversation__review-box__title">
+      Nhận xét công việc
+      </div> */}
       <div className="conversation__review-box__btn-wrapper">
-        <ReviewButton variant="warning" text="Nhận xét khách hàng" />
+        <ReviewButton variant="warning" text="Nhận xét công việc" />
       </div>
       <div className="conversation__review-box__sub-title">
-        Gửi <strong>nhận xét về khách hàng</strong> giúp bạn tăng thêm nhiều cơ
-        hội về việc làm hơn
+        Gửi <strong>nhận xét về công việc</strong> giúp bạn tăng thêm nhiều cơ
+        hội việc làm hơn
       </div>
     </div>
   );

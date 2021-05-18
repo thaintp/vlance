@@ -20,6 +20,7 @@ const OfferItem = ({ offer, job }) => {
           icon: "success",
           title: "Chọn ứng viên thành công",
         });
+        window.location.reload();
       } else {
         Toast.fire({
           icon: "error",
@@ -92,7 +93,12 @@ const OfferItem = ({ offer, job }) => {
               )}
 
               {job.freelancer_id && job.freelancer_id === freelancer.id ? (
-                <Button className="btn-info" size="md">
+                job.status === 4 ?
+                <Button className="btn-warning" size="md" disabled>
+                Trúng thầu
+                </Button>
+                :
+                <Button className="btn-info" size="md" disabled>
                   Được chọn
                 </Button>
               ) : (
