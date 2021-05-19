@@ -331,6 +331,10 @@ a.button {
 .category__tag--active {
   color: $orange-2;
 }
+.category__list {
+  margin-top: 20px;
+  color: $orange-2;
+}
 
 // Filter
 .filter__tag {
@@ -881,4 +885,16 @@ a {
 .conversation__message-item__created-at {
   color: #666666;
   font-size: 14px;
+}
+
+
+// Other component
+.bold-link {
+  color: #000 !important;
+  &:hover {
+    color: $blue-one !important;
+  }
+  &--active {
+    color: $orange-1 !important;
+  }
 }
