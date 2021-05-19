@@ -13,7 +13,6 @@ const Category = ({ onChange }) => {
     });
   }, []);
 
-  
   const handleOnclick = (item) => {
     console.log(item)
     setCategory(item);
