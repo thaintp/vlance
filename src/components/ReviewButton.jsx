@@ -2,7 +2,7 @@ import { ReviewModal } from "components";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
-const ReviewButton = ({ variant, size, text }) => {
+const ReviewButton = ({ variant, size, text, job_id }) => {
   const [reviewModalShow, setReviewModalShow] = useState(false);
 
   return (
@@ -16,6 +16,7 @@ const ReviewButton = ({ variant, size, text }) => {
       </Button>
       <ReviewModal
         show={reviewModalShow}
+        job_id={job_id}
         onHide={() => setReviewModalShow(false)}
       />
     </>

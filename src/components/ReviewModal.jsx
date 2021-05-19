@@ -4,18 +4,36 @@ import Button from "react-bootstrap/Button";
 import Rating from "react-rating";
 import { useState, useRef } from "react";
 import { ReviewResultModal } from "components";
+import Toast from 'utils/toast';
+import ReviewService from 'services/review';
 
-const ReviewModal = (props) => {
-  let dummyRate = 0;
+const ReviewModal = ({ job_id, onHide, show }) => {
   const [rate, setRate] = useState(0);
   const reviewRef = useRef("");
   const [reviewResultModalShow, setReviewResultModalShow] = useState(false);
 
   const showReviewResultModal = () => {
-    if (dummyRate > 0 && reviewRef.current.value !== "") {
-      props.onHide();
-      setRate(dummyRate);
-      setReviewResultModalShow(true);
+    if (rate > 0 && reviewRef.current.value !== "") {
+      ReviewService.post(job_id, reviewRef.current.value, rate).then(data => {
+        if (data.status) {
+          onHide();
+          Toast.fire({
+            icon: "success",
+            title: data.message,
+          });
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: data.message,
+          });
+        }
+      })
+    } else {
+      Toast.fire({
+        icon: "error",
+        title: "Đánh giá thất bại.",
+        text: "Vui lòng điền đầy đủ thông tin để đánh giá"
+      });
     }
   };
 
@@ -24,9 +42,10 @@ const ReviewModal = (props) => {
       {/* Submit: rate & review */}
       <form action="">
         <Modal
-          {...props}
           aria-labelledby="contained-modal-title-vcenter"
           centered
+          onHide={onHide}
+          show={show}
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -51,7 +70,7 @@ const ReviewModal = (props) => {
                     alt=""
                   />
                 }
-                onChange={(value) => (dummyRate = value)}
+                onChange={(value) => setRate(value)}
               />
 
               <textarea
@@ -69,7 +88,7 @@ const ReviewModal = (props) => {
             <Button
               className="btn-danger review-form__btn"
               size="md"
-              onClick={props.onHide}
+              onClick={onHide}
             >
               Hủy
             </Button>

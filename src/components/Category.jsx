@@ -14,7 +14,7 @@ const Category = ({ onChange }) => {
   }, []);
 
   const handleOnclick = (item) => {
-    console.log(item)
+    console.log(item);
     setCategory(item);
     onChange(item);
   };
@@ -23,9 +23,13 @@ const Category = ({ onChange }) => {
     <div className="category">
       <div className="sidebar__title sidebar__text--bold">Category</div>
       <div className="category__list">
-        <Link to="#" className={classnames("category__tag bold-link", {
-              "bold-link--active": category.id === null,
-            })} onClick={() => handleOnclick({id: null})}>
+        <Link
+          to="#"
+          className={classnames("category__tag bold-link", {
+            "bold-link--active": category.id === null,
+          })}
+          onClick={() => handleOnclick({ id: null })}
+        >
           All dresses
         </Link>
         {categories.map((c) => (

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 import { Category, Filter, JobList, CustomPagination } from "components";
 import JobService from "services/job";
-import useQuery from 'hooks/useQuery'
+import useQuery from "hooks/useQuery";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -14,8 +14,8 @@ const Jobs = () => {
   const [totalRecords, setTotalRecords] = useState(100);
   const [category, setCategory] = useState(undefined);
   const query = useQuery();
-  const type = query.get('type');
-  const name = query.get('name');
+  const type = query.get("type");
+  const name = query.get("name");
 
   const onPageChange = (page_data) => {
     const { currentPage, totalPages, pageLimit } = page_data;
@@ -23,13 +23,17 @@ const Jobs = () => {
   };
 
   useEffect(() => {
-    JobService.get({ page: currentPages, category_id: category, job_type: type, contain_key: name }).then((data) => {
+    JobService.get({
+      page: currentPages,
+      category_id: category,
+      job_type: type,
+      contain_key: name,
+    }).then((data) => {
       setJobs(data?.data);
       const { total } = data?.meta;
       setTotalRecords(total);
     });
   }, [currentPages, category, type]);
-
 
   return (
     <div

@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <nav className="nav-bar">
       <Link to="/postjob" className="my-auto nav-bar__link">
-      Đăng tin tuyển dụng
+        Đăng tin tuyển dụng
       </Link>
       <Dropdown>
         <Dropdown.Toggle variant="" id="dropdown-basic">
@@ -29,7 +29,7 @@ const NavBar = () => {
         </Dropdown.Menu>
       </Dropdown>
       <Link to="/users" className="my-auto nav-bar__link">
-          Tất cả Freelancer
+        Tất cả Freelancer
       </Link>
     </nav>
   );

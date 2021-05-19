@@ -37,9 +37,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="not-fluid">
+      {/* <div className="not-fluid">
         <Conversation />
-      </div>
+      </div> */}
     </div>
   );
 };

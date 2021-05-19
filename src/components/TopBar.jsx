@@ -9,12 +9,15 @@ const TopBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('name', inputName.current.value);
+    urlParams.set("name", inputName.current.value);
     window.location.search = urlParams;
   };
   return (
     <div className="top-bar">
-      <form className="top-bar__item top-bar__search"         onSubmit={(e) => handleSearch(e)}>
+      <form
+        className="top-bar__item top-bar__search"
+        onSubmit={(e) => handleSearch(e)}
+      >
         <input
           type="text"
           placeholder="Tìm kiếm..."
