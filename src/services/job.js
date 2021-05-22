@@ -93,6 +93,15 @@ class JobService {
       .then((response) => response.data)
       .catch((error) => console.error(error));
   }
+  async sendPostJob(body = {}) {
+    return await axios({
+      method: "POST",
+      url: `/job`,
+      data: body,
+    })
+      .then((response) => response.data)
+      .catch((error) => console.error(error));
+  }
   async finishJob(body = {}) {
     return await axios({
       method: "GET",

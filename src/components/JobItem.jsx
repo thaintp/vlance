@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FaRegBookmark } from "react-icons/fa";
 import jobType from "utils/jobType";
 import { truncate } from "utils/string";
+import { toVND } from "utils/number";
+
 const JobItem = ({ job }) => {
   return (
     <div className="job-item">
@@ -24,7 +26,7 @@ const JobItem = ({ job }) => {
       </Link>
       <div className="job-item__checkout">
         <div className="checkout__title">
-          Toàn Quốc | {job.category?.name} | {job.expect_balance}
+          Toàn Quốc | {job.category?.name} | {toVND(job.expect_balance)}
         </div>
         <div className="checkout__expired">Hạn nhận hồ sơ: 21 ngày 16 giờ</div>
       </div>
